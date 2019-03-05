@@ -100,6 +100,7 @@ namespace FlyMasters.API.Controllers
         // DELETE: api/Profiles/5
         public void Delete(int id)
         {
+            //
         }
     }
 }
