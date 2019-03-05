@@ -1,0 +1,44 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27130.2036
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FlyMasters.Business", "FlyMasters.Business\FlyMasters.Business.csproj", "{D7FCAEEC-38E3-4006-BF4C-7539BA752662}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{A60B8EA6-D0F1-49AF-BD63-7A5AE82911D7}"
+	ProjectSection(SolutionItems) = preProject
+		.nuget\NuGet.Config = .nuget\NuGet.Config
+		.nuget\NuGet.exe = .nuget\NuGet.exe
+		.nuget\NuGet.targets = .nuget\NuGet.targets
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FlyMasters.UI", "FlyMasters.UI\FlyMasters.UI.csproj", "{19D6FA54-FB4D-4E8E-AE43-90033A5DE533}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FlyMasters.API", "FlyMasters.API\FlyMasters.API.csproj", "{49E533C0-C450-42C4-80B4-36799FD6CB73}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D7FCAEEC-38E3-4006-BF4C-7539BA752662}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D7FCAEEC-38E3-4006-BF4C-7539BA752662}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D7FCAEEC-38E3-4006-BF4C-7539BA752662}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D7FCAEEC-38E3-4006-BF4C-7539BA752662}.Release|Any CPU.Build.0 = Release|Any CPU
+		{19D6FA54-FB4D-4E8E-AE43-90033A5DE533}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{19D6FA54-FB4D-4E8E-AE43-90033A5DE533}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{19D6FA54-FB4D-4E8E-AE43-90033A5DE533}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{19D6FA54-FB4D-4E8E-AE43-90033A5DE533}.Release|Any CPU.Build.0 = Release|Any CPU
+		{49E533C0-C450-42C4-80B4-36799FD6CB73}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{49E533C0-C450-42C4-80B4-36799FD6CB73}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{49E533C0-C450-42C4-80B4-36799FD6CB73}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{49E533C0-C450-42C4-80B4-36799FD6CB73}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {7F4155CB-AA61-4E97-81B3-0E780EE1857E}
+	EndGlobalSection
+EndGlobal

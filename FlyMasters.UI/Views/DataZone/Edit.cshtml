@@ -1,0 +1,113 @@
+﻿@model FlyMasters.UI.ViewModels.ProfileEditModel
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>Edit</h2>
+
+@using (Html.BeginForm("Edit", "DataZone", FormMethod.Post, new { @enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+    @Html.HiddenFor(model => model.ProfileID)
+
+    <fieldset>
+        <legend> Edit Profile Details</legend>
+
+        @*<div class="editor-label">
+                @Html.LabelFor(model => model.ProfileID)
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.ProfileID)
+                @Html.ValidationMessageFor(model => model.ProfileID)
+            </div>*@
+
+        @*<div class="editor-label">
+                @Html.LabelFor(model => model.ImportID)
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.ImportID)
+                @Html.ValidationMessageFor(model => model.ImportID)
+            </div>*@
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.FirstName)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.FirstName)
+            @Html.ValidationMessageFor(model => model.FirstName)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.LastName)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.LastName)
+            @Html.ValidationMessageFor(model => model.LastName)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Phone)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Phone)
+            @Html.ValidationMessageFor(model => model.Phone)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Email)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Email)
+            @Html.ValidationMessageFor(model => model.Email)
+        </div>
+
+        @*<div class="editor-label">
+                @Html.LabelFor(model => model.Status)
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.Status)
+                @Html.ValidationMessageFor(model => model.Status)
+            </div>
+
+            <div class="editor-label">
+                @Html.LabelFor(model => model.CreatedBy)
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.CreatedBy)
+                @Html.ValidationMessageFor(model => model.CreatedBy)
+            </div>
+
+            <div class="editor-label">
+                @Html.LabelFor(model => model.CreateDate)
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.CreateDate)
+                @Html.ValidationMessageFor(model => model.CreateDate)
+            </div>
+
+            <div class="editor-label">
+                @Html.LabelFor(model => model.UpdateDate)
+            </div>
+            <div class="editor-field">
+                @Html.EditorFor(model => model.UpdateDate)
+                @Html.ValidationMessageFor(model => model.UpdateDate)
+            </div>*@
+
+        <p>
+            <input type="submit" value="Save" />
+            <input type="button" value="Mark as incomplete" />
+            <input type="button" value="Convert to Lead" />
+            <input type="button" value="Close" id="btnClose" onclick="return fnCloseDialog()" class="closebtn" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

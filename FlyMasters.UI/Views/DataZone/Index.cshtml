@@ -1,0 +1,82 @@
+﻿@model IEnumerable<FlyMasters.UI.ViewModels.DataZoneViewModel>
+
+@{
+    ViewBag.Title = "Profiles";
+}
+
+<h2>Profiles</h2>
+
+@*<p>
+    @Html.ActionLink("Create New", "Create")
+</p>*@
+<table border="1" style=" border:solid;">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.ProfileID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FirstName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LastName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Phone)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Email)
+        </th>
+
+        @*<th>
+            @Html.DisplayNameFor(model => model.StatusID)
+        </th>*@
+        <th>
+            @Html.DisplayNameFor(model => model.CreateDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Source)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Status)
+        </th>
+        <th>Action Links</th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.ProfileID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FirstName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.LastName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Phone)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Email)
+        </td>
+        @*<td>
+            @Html.DisplayFor(modelItem => item.StatusID)
+        </td>*@
+        <td>
+            @Html.DisplayFor(modelItem => item.CreateDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Source)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Status)
+        </td>
+        <td>
+            @Html.ActionLink("Edit Details", "Edit", new { id = item.ProfileID }) |
+            @Html.ActionLink("View Log", "Details", new { /* id=item.ProfileID */ })
+            @*|@Html.ActionLink("Delete", "Delete", new { /* id=item.ProfileID */ })*@
+        </td>
+    </tr>
+}
+
+</table>
