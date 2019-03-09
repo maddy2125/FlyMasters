@@ -77,6 +77,7 @@ namespace FlyMasters.API.Controllers
                     profile.LastName = editModel.LastName;
                     profile.Phone = editModel.Phone;
                     profile.Status = 3;
+                    profile.UpdateDate = DateTime.Now;
 
                     _db.Entry(profile).State = EntityState.Modified;
                     _db.SaveChanges();
