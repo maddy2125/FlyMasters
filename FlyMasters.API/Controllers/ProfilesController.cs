@@ -7,9 +7,11 @@ using System.Web.Http;
 using FlyMasters.Business.Models;
 using FlyMasters.API.ViewModels;
 using System.Data.Entity;
+using System.Web.Http.Cors;
 
 namespace FlyMasters.API.Controllers
 {
+    [EnableCors(origins: "http://localhost:4200", headers: "*", methods: "*")]
     public class ProfilesController : ApiController
     {
         private FLYMASTERSContext _db;
@@ -61,6 +63,8 @@ namespace FlyMasters.API.Controllers
         }
 
         // POST: api/Profiles
+        [HttpPost]
+        
         public HttpStatusCode Post(ProfileEditModel editModel)
         {
             try

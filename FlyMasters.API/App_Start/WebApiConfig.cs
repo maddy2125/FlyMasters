@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Http;
+//using Microsoft.AspNet.WebApi.Cors;
 
 namespace FlyMasters.API
 {
@@ -19,6 +20,8 @@ namespace FlyMasters.API
                 routeTemplate: "api/{controller}/{id}",
                 defaults: new { id = RouteParameter.Optional }
             );
+            
+        config.EnableCors();
         }
     }
 }
