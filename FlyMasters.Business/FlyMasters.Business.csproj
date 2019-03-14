@@ -54,6 +54,7 @@
     <Compile Include="Models\Mapping\tblLeadMap.cs" />
     <Compile Include="Models\Mapping\tblPrivilegeMap.cs" />
     <Compile Include="Models\Mapping\tblProfileMap.cs" />
+    <Compile Include="Models\Mapping\tblProfileNoteMap.cs" />
     <Compile Include="Models\Mapping\tblSourceMap.cs" />
     <Compile Include="Models\Mapping\tblStatusMap.cs" />
     <Compile Include="Models\Mapping\tblUserMap.cs" />
@@ -62,6 +63,7 @@
     <Compile Include="Models\tblLead.cs" />
     <Compile Include="Models\tblPrivilege.cs" />
     <Compile Include="Models\tblProfile.cs" />
+    <Compile Include="Models\tblProfileNote.cs" />
     <Compile Include="Models\tblSource.cs" />
     <Compile Include="Models\tblStatus.cs" />
     <Compile Include="Models\tblUser.cs" />

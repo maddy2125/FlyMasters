@@ -20,6 +20,7 @@ namespace FlyMasters.Business.Models
         public DbSet<tblLead> tblLeads { get; set; }
         public DbSet<tblPrivilege> tblPrivileges { get; set; }
         public DbSet<tblProfile> tblProfiles { get; set; }
+        public DbSet<tblProfileNote> tblProfileNotes { get; set; }
         public DbSet<tblSource> tblSources { get; set; }
         public DbSet<tblStatus> tblStatus { get; set; }
         public DbSet<tblUser> tblUsers { get; set; }
@@ -31,6 +32,7 @@ namespace FlyMasters.Business.Models
             modelBuilder.Configurations.Add(new tblLeadMap());
             modelBuilder.Configurations.Add(new tblPrivilegeMap());
             modelBuilder.Configurations.Add(new tblProfileMap());
+            modelBuilder.Configurations.Add(new tblProfileNoteMap());
             modelBuilder.Configurations.Add(new tblSourceMap());
             modelBuilder.Configurations.Add(new tblStatusMap());
             modelBuilder.Configurations.Add(new tblUserMap());

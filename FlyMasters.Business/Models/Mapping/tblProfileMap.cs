@@ -40,12 +40,12 @@ namespace FlyMasters.Business.Models.Mapping
             this.HasOptional(t => t.tblImport)
                 .WithMany(t => t.tblProfiles)
                 .HasForeignKey(d => d.ImportID);
+            this.HasOptional(t => t.tblStatus)
+                .WithMany(t => t.tblProfiles)
+                .HasForeignKey(d => d.Status);
             this.HasOptional(t => t.tblUser)
                 .WithMany(t => t.tblProfiles)
                 .HasForeignKey(d => d.CreatedBy);
-            this.HasOptional(t => t.tblStatus)
-        .WithMany(t => t.tblProfiles)
-        .HasForeignKey(d => d.Status);
 
         }
     }

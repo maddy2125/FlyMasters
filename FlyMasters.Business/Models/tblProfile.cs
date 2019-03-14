@@ -8,6 +8,7 @@ namespace FlyMasters.Business.Models
         public tblProfile()
         {
             this.tblLeads = new List<tblLead>();
+            this.tblProfileNotes = new List<tblProfileNote>();
         }
 
         public int ProfileID { get; set; }
@@ -22,8 +23,8 @@ namespace FlyMasters.Business.Models
         public Nullable<System.DateTime> UpdateDate { get; set; }
         public virtual tblImport tblImport { get; set; }
         public virtual ICollection<tblLead> tblLeads { get; set; }
-        public virtual tblUser tblUser { get; set; }
-
         public virtual tblStatus tblStatus { get; set; }
+        public virtual tblUser tblUser { get; set; }
+        public virtual ICollection<tblProfileNote> tblProfileNotes { get; set; }
     }
 }

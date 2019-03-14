@@ -14,6 +14,9 @@ namespace FlyMasters.Business.Models.Mapping
             this.Property(t => t.UserName)
                 .HasMaxLength(50);
 
+            this.Property(t => t.Password)
+                .HasMaxLength(50);
+
             this.Property(t => t.FirstName)
                 .HasMaxLength(50);
 
@@ -30,6 +33,7 @@ namespace FlyMasters.Business.Models.Mapping
             this.ToTable("tblUser");
             this.Property(t => t.UserID).HasColumnName("UserID");
             this.Property(t => t.UserName).HasColumnName("UserName");
+            this.Property(t => t.Password).HasColumnName("Password");
             this.Property(t => t.FirstName).HasColumnName("FirstName");
             this.Property(t => t.LastName).HasColumnName("LastName");
             this.Property(t => t.IsActive).HasColumnName("IsActive");
