@@ -57,6 +57,17 @@ namespace FlyMasters.API.Controllers
                 editModel.LastName = profile.LastName;
                 editModel.Phone = profile.Phone;
                 editModel.StatusID = profile.Status;
+
+                var comments = (from pn in _db.tblProfileNotes
+                                select pn).Select(x => new ProfileNotesViewModel
+                                {
+                                    Comments = x.Description,
+                                    AddedOn = x.AddedOn.Value,
+                                    AddedBy = x.tblUser.UserName
+                                }
+                               ).OrderBy(x => x.AddedOn);
+
+                editModel.profileNotesViewModel = comments;
             }
 
             return editModel;

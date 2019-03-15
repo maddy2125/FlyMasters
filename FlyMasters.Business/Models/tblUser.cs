@@ -11,6 +11,7 @@ namespace FlyMasters.Business.Models
             this.tblLeads1 = new List<tblLead>();
             this.tblProfiles = new List<tblProfile>();
             this.tblUserPrivileges = new List<tblUserPrivilege>();
+            this.tblProfileNotes = new List<tblProfileNote>();
         }
 
         public int UserID { get; set; }
@@ -27,5 +28,7 @@ namespace FlyMasters.Business.Models
         public virtual ICollection<tblLead> tblLeads1 { get; set; }
         public virtual ICollection<tblProfile> tblProfiles { get; set; }
         public virtual ICollection<tblUserPrivilege> tblUserPrivileges { get; set; }
+
+        public virtual ICollection<tblProfileNote> tblProfileNotes { get; set; }
     }
 }

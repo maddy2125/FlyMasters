@@ -195,6 +195,7 @@
     </Compile>
     <Compile Include="Models\DataZoneViewModel.cs" />
     <Compile Include="Models\ProfileEditModel.cs" />
+    <Compile Include="Models\ProfileNotesViewModel.cs" />
     <Compile Include="Models\UsersListModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

@@ -26,6 +26,10 @@ namespace FlyMasters.Business.Models.Mapping
             this.HasRequired(t => t.tblProfile)
                 .WithMany(t => t.tblProfileNotes)
                 .HasForeignKey(d => d.ProfileId);
+            this.HasOptional(t => t.tblUser)
+                .WithMany(t => t.tblProfileNotes)
+                .HasForeignKey(d => d.AddedBy);
+
 
         }
     }

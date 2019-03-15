@@ -11,5 +11,7 @@ namespace FlyMasters.Business.Models
         public Nullable<int> AddedBy { get; set; }
         public Nullable<System.DateTime> AddedOn { get; set; }
         public virtual tblProfile tblProfile { get; set; }
+
+        public virtual tblUser tblUser { get; set; }
     }
 }
