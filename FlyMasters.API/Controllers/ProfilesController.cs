@@ -108,6 +108,35 @@ namespace FlyMasters.API.Controllers
             return HttpStatusCode.BadRequest;
         }
 
+        [HttpPost]
+        public HttpStatusCode SaveComments(int userId, int profileId, string comments) {
+            try
+            {
+                _db = new FLYMASTERSContext();
+                // TODO: Add update logic here
+
+                tblProfileNote notes;
+
+                if (!string.IsNullOrEmpty(comments)) {
+                    notes = new tblProfileNote();
+                    notes.ProfileId = profileId;
+                    notes.Description = comments;
+                    notes.AddedOn = DateTime.Now;
+                    notes.AddedBy = userId;
+
+                    _db.tblProfileNotes.Add(notes);
+                    _db.SaveChanges();
+                    return HttpStatusCode.OK;
+                }
+                return HttpStatusCode.BadRequest;
+
+            }
+            catch (Exception ex)
+            {
+                return HttpStatusCode.InternalServerError;
+            }            
+        }
+
         // PUT: api/Profiles/5
         public void Put(int id, [FromBody]string value)
         {
