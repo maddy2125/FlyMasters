@@ -67,7 +67,7 @@ namespace FlyMasters.API.Controllers
                                 }
                                ).OrderBy(x => x.AddedOn);
 
-                editModel.profileNotesViewModel = comments;
+                editModel.profileNotesViewModel = comments.ToList();
             }
 
             return editModel;
@@ -97,6 +97,20 @@ namespace FlyMasters.API.Controllers
                     _db.Entry(profile).State = EntityState.Modified;
                     _db.SaveChanges();
 
+                    tblProfileNote notes;
+
+                    if (!string.IsNullOrEmpty(editModel.Notes))
+                    {
+                        notes = new tblProfileNote();
+                        notes.ProfileId = editModel.ProfileID;
+                        notes.Description = editModel.Notes;
+                        notes.AddedOn = DateTime.Now;
+                        notes.AddedBy = 1;
+
+                        _db.tblProfileNotes.Add(notes);
+                        _db.SaveChanges();
+                        return HttpStatusCode.OK;
+                    }
                     return HttpStatusCode.OK;
                 }
             }

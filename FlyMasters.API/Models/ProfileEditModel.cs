@@ -25,6 +25,8 @@ namespace FlyMasters.API.ViewModels
 
         public int? StatusID { get; set; }
 
-        public IEnumerable<ProfileNotesViewModel> profileNotesViewModel { get; set; }
+        public string Notes { get; set; }
+
+        public IList<ProfileNotesViewModel> profileNotesViewModel { get; set; }
     }
 }
