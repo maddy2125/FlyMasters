@@ -59,6 +59,7 @@ namespace FlyMasters.API.Controllers
                 editModel.StatusID = profile.Status;
 
                 var comments = (from pn in _db.tblProfileNotes
+                                where pn.ProfileId == profile.ProfileID
                                 select pn).Select(x => new ProfileNotesViewModel
                                 {
                                     Comments = x.Description,
