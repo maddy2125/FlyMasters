@@ -12,8 +12,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{A60B8E
 		.nuget\NuGet.targets = .nuget\NuGet.targets
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FlyMasters.UI", "FlyMasters.UI\FlyMasters.UI.csproj", "{19D6FA54-FB4D-4E8E-AE43-90033A5DE533}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FlyMasters.API", "FlyMasters.API\FlyMasters.API.csproj", "{49E533C0-C450-42C4-80B4-36799FD6CB73}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "FlyMastersUI", "FlyMastersUI", "{4F05DFBB-EADA-4317-89C9-985DDC6434B5}"
@@ -28,10 +26,6 @@ Global
 		{D7FCAEEC-38E3-4006-BF4C-7539BA752662}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D7FCAEEC-38E3-4006-BF4C-7539BA752662}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D7FCAEEC-38E3-4006-BF4C-7539BA752662}.Release|Any CPU.Build.0 = Release|Any CPU
-		{19D6FA54-FB4D-4E8E-AE43-90033A5DE533}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{19D6FA54-FB4D-4E8E-AE43-90033A5DE533}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{19D6FA54-FB4D-4E8E-AE43-90033A5DE533}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{19D6FA54-FB4D-4E8E-AE43-90033A5DE533}.Release|Any CPU.Build.0 = Release|Any CPU
 		{49E533C0-C450-42C4-80B4-36799FD6CB73}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{49E533C0-C450-42C4-80B4-36799FD6CB73}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{49E533C0-C450-42C4-80B4-36799FD6CB73}.Release|Any CPU.ActiveCfg = Release|Any CPU
