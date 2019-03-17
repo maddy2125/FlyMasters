@@ -78,6 +78,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="DBScripts\FlyMasters.sql" />
+    <Content Include="DBScripts\FlyMastersData.sql" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\nuget.targets" />
