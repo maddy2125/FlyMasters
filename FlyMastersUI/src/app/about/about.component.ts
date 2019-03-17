@@ -17,7 +17,9 @@ export class AboutComponent implements OnInit {
   version: string = environment.version;
 
   constructor(private route: ActivatedRoute,private location: Location,private quoteService: QuoteService) {}
- order: any;
+
+
+  order: any;
  isLoading: boolean;
  leadData: Profile;
   ngOnInit() {
@@ -36,8 +38,8 @@ export class AboutComponent implements OnInit {
       .subscribe((quote: any) => {
         //this.quote = quote;
         this.leadData = quote;
-        
         console.log(this.leadData);
+        
       });      
 }
 

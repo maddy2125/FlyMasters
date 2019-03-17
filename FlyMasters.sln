@@ -16,7 +16,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FlyMasters.UI", "FlyMasters
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FlyMasters.API", "FlyMasters.API\FlyMasters.API.csproj", "{49E533C0-C450-42C4-80B4-36799FD6CB73}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "app", "app", "{4F05DFBB-EADA-4317-89C9-985DDC6434B5}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "FlyMastersUI", "FlyMastersUI", "{4F05DFBB-EADA-4317-89C9-985DDC6434B5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

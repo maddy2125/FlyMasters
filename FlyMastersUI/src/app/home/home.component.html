@@ -1,0 +1,81 @@
+<div class="container-fluid">
+  <div class="jumbotron text-center">
+    <app-loader [isLoading]="isLoading"></app-loader>
+    
+  <div id="agGrid" >
+    <ag-grid-angular *ngIf="!isEdit"
+    style="width: 100%; height: 530px;" 
+    class="ag-theme-balham"
+    [rowData]="rowData" 
+    [columnDefs]="columnDefs"
+    pagination="true"
+    paginationPageSize="15">
+  </ag-grid-angular>
+</div>
+<div *ngIf="isEdit" >
+  
+  <div class="modal-header">
+    <h4 class="modal-title">Profile Validate</h4>
+    <!-- <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button> -->
+  </div>
+  <div class="modal-body">
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            <form>
+                <div class="form-row">
+                <div class="form-group">
+                <label for="inputFirstName">First Name</label>                
+                  <input type="text" class="form-control" id="inputFirstName" [(ngModel)]="leadData.FirstName" name="firstname" placeholder="First Name">
+                  
+                </div>
+                </div>
+                <div class="form-row">
+                <div class="form-group">
+                  <label for="inputLastName">Last Name</label>
+                  <input type="text" class="form-control" id="inputLastName" [(ngModel)]="leadData.LastName" name="lastname" placeholder="Last Name">
+                </div></div>
+                <div class="form-row">
+                <div class="form-group">
+                  <label for="inputPhone">Phone</label>
+                  <input type="text" class="form-control" id="inputPhone" [(ngModel)]="leadData.Phone" name="phone" placeholder="111 111-1111">
+                </div>
+                </div>
+                <div class="form-row">
+                  <div class="form-group col-md-6">
+                    <label for="inputEmail">Email</label>
+                    <input type="text" class="form-control" id="inputEmail" [(ngModel)]="leadData.Email" name="email">
+                  </div>
+                </div>
+                <div class="form-row">
+                  <div class="form-group col-md-6">
+                    <label for="inputNotes">Notes</label>
+                    <input type="text" class="form-control" id="inputNotes" [(ngModel)]="leadData.Notes" name="notes">
+                  </div>
+                </div>    
+            </form>
+          </div>   
+          <div class="form-group col-md-6">
+              <label for="inputNotes">Previous Notes:</label>
+              <div id="agNotesGrid" >
+                <ag-grid-angular 
+                style="width: 100%; height: auto;" 
+                class="ag-theme-balham"
+                [rowData]="rowNotesData" 
+                [columnDefs]="columnNotesDefs"
+                pagination="true"
+                paginationPageSize="15">
+              </ag-grid-angular> 
+            </div>
+        </div>   
+    </div>
+  </div>
+  <div class="modal-footer">
+  <button type="submit" (click)="save()" class="btn btn-primary">Save</button>
+  <button type="button" *ngIf="isEdit" class="btn btn-outline-dark" (click)="back()">InComplete Details</button>
+    <button type="button" class="btn btn-outline-dark" (click)="back()">Back</button>
+  </div>
+</div>
+  </div>
+</div>

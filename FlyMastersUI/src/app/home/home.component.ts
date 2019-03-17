@@ -1,14 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { finalize } from 'rxjs/operators';
-
 import { QuoteService } from './quote.service';
 import { Profile } from '../Models/profile';
 import { CellEditRenderingComponent } from "../home/celleditrenderingcomponent";
 import { CustomCellComponent } from '../custom-cell/custom-cell.component';
 import { Location, LocationStrategy, PathLocationStrategy } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
-
-
 
 @Component({
   selector: 'app-home',
@@ -24,6 +21,7 @@ export class HomeComponent implements OnInit {
   constructor(private route: ActivatedRoute,private location: Location,private quoteService: QuoteService) {}
 
   columnDefs = [
+    {headerName: 'Select', field: 'ProfileID', width: 99, checkboxSelection: true },
 		{headerName: 'Profile ID', field: 'ProfileID', sortable: true, filter: true, width: 99 },
 		{headerName: 'First Name', field: 'FirstName', sortable: true, filter: true, width: 120 },
     {headerName: 'Last Name', field: 'LastName', sortable: true, filter: true, width: 120 },
@@ -42,7 +40,13 @@ export class HomeComponent implements OnInit {
   ];
   
   rowData :any[];
-  
+  rowNotesData :any[];  
+
+  columnNotesDefs = [
+		{headerName: 'Added On', field: 'AddedOn', sortable: true, filter: true },
+		{headerName: 'Added By', field: 'AddedBy', sortable: true, filter: true },
+    {headerName: 'Notes', field: 'Comments', sortable: true, filter: true }    
+  ];  
   
   ngOnInit() {
     console.log(this.route.snapshot.queryParams["id"]);
@@ -59,7 +63,6 @@ export class HomeComponent implements OnInit {
         })
       )
       .subscribe((quote: any[]) => {
-        //this.quote = quote;
         this.rowData = quote;
       });
   }
@@ -73,10 +76,9 @@ export class HomeComponent implements OnInit {
         })
       )
       .subscribe((quote: any) => {
-        //this.quote = quote;
-        this.leadData = quote;
-        
-        console.log(this.leadData);
+        this.leadData = quote;        
+        console.log(quote.profileNotesViewModel[0]);
+        this.rowNotesData = quote.profileNotesViewModel;
       });      
 }
 
@@ -97,8 +99,7 @@ save(){
         err => {
           console.log("Error occured");
         }
-      );
-  
+      );  
 }
 back(){
   location.href='/home';
