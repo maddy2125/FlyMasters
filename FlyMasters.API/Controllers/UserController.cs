@@ -16,7 +16,7 @@ namespace FlyMasters.API.Controllers
     {
         private FLYMASTERSContext _db;
 
-        //RouteAttribute("api/getusers")
+        [Route("Api/getusers")]
         public IEnumerable<UsersListModel> GetUsers()
         {
             _db = new FLYMASTERSContext();
@@ -32,6 +32,46 @@ namespace FlyMasters.API.Controllers
             return users;
         }
 
+
+        [Route("Api/UserLogin")]
+        [HttpPost]
+        public LoginModel Login(LoginModel Lg)
+        {
+            _db = new FLYMASTERSContext();
+            try
+            {
+                if (_db.tblUsers.Where(x => x.UserName == Lg.UserName).Count() == 0)
+                {
+                    Lg.Status = "Invalid"; Lg.Message = "Invalid User.";
+                }
+                else
+                {
+                    var obj = _db.tblUsers.Where(x => x.UserName == Lg.UserName).First();
+
+                    if (obj != null)
+                    {
+                        if (!obj.IsActive == true)
+                        {
+                            Lg.Status = "Inactive"; Lg.Message = "User Inactive.";
+                        }
+                        else if(obj.Password == Lg.Password)
+                        {
+                            Lg.Status = "Success"; Lg.Message = string.Empty;
+                        }
+                        else
+                        {
+                            Lg.Status = "Failure"; Lg.Message = "Invalid username/password.";
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Lg.Status = "Error"; Lg.Message = ex.Message;
+            }
+
+            return Lg;
+        }
         //// GET: api/User
         //public IEnumerable<string> Get()
         //{
