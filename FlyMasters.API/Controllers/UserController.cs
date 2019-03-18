@@ -54,9 +54,12 @@ namespace FlyMasters.API.Controllers
                         {
                             Lg.Status = "Inactive"; Lg.Message = "User Inactive.";
                         }
-                        else if(obj.Password == Lg.Password)
+                        else if (obj.Password == Lg.Password)
                         {
                             Lg.Status = "Success"; Lg.Message = string.Empty;
+                            Lg.PrivilegeIds = 
+                                _db.tblUserPrivileges.Where(x => x.UserID == obj.UserID)
+                                .Select(x => x.PrivilegeID).ToArray();
                         }
                         else
                         {
