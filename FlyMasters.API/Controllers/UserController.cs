@@ -26,12 +26,20 @@ namespace FlyMasters.API.Controllers
                          select p).Select(x => new UsersListModel
                          {
                              UserId = x.UserID,
-                             Name = x.FirstName + " " + x.LastName
+                             FirstName = x.FirstName + " " + x.LastName
+                             ,LastName = x.FirstName + " " + x.LastName
+                             ,UserName = x.UserName
                          }).ToList();
 
             return users;
         }
 
+        [Route("Api/UserLogin")]
+        [HttpGet]
+        public LoginModel Login()
+        {
+            return new LoginModel { };
+        }
 
         [Route("Api/UserLogin")]
         [HttpPost]
