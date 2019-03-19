@@ -23,18 +23,19 @@ export class HomeComponent implements OnInit {
   constructor(private route: ActivatedRoute,private location: Location,private quoteService: QuoteService) {}
   
   columnDefs = [
-    {headerName: 'Select', field: 'ProfileID', width: 99, checkboxSelection: true },
+    {headerName: 'Select', field: 'ProfileID', width: 75, checkboxSelection: true },
 		{headerName: 'Profile ID', field: 'ProfileID', sortable: true, filter: true, width: 99 },
-		{headerName: 'First Name', field: 'FirstName', sortable: true, filter: true, width: 120 },
-    {headerName: 'Last Name', field: 'LastName', sortable: true, filter: true, width: 120 },
-    {headerName: 'Phone', field: 'Phone', sortable: true, filter: true, width: 110 },
+		{headerName: 'First Name', field: 'FirstName', sortable: true, filter: true, width: 110 },
+    {headerName: 'Last Name', field: 'LastName', sortable: true, filter: true, width: 110 },
+    {headerName: 'Phone', field: 'Phone', sortable: true, filter: true, width: 105 },
     {headerName: 'Email', field: 'Email', sortable: true, filter: true, width: 150 },
-    {headerName: 'Source', field: 'Source', sortable: true, filter: true },
+    {headerName: 'Source', field: 'Source', sortable: true, filter: true, width: 125 },
+    {headerName: 'Assigned To', field: 'AssignedTo', sortable: true, filter: true, width: 115 },
     {headerName: 'Status', field: 'Status', sortable: true, filter: true, width: 130 },
     {
 			headerName: '', 
 			field: 'ProfileID',
-      cellRendererFramework:CustomCellComponent, width: 290
+      cellRendererFramework:CustomCellComponent, width: 185
       ,cellRendererParams: {
         inRouterLink: '/createLead/'
       }

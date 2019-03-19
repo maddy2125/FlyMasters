@@ -30,6 +30,8 @@ namespace FlyMasters.API.ViewModels
 
         public string Source { get; set; }
 
+        public string AssignedTo { get; set; }
+
 
     }
 }

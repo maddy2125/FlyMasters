@@ -34,6 +34,7 @@ namespace FlyMasters.API.Controllers
                                 StatusID = x.Status.Value,
                                 Status = x.tblStatus.StatusName,
                                 Source = _db.tblSources.Where(t => t.SourceId == x.tblImport.SourceID).FirstOrDefault().SourceName
+                                , AssignedTo = _db.tblLeads.Where(t => t.ProfileID == x.ProfileID && t.IsActive == true).FirstOrDefault().tblUser1.UserName
                             }).OrderByDescending(x => x.CreateDate);
 
             return profiles;
