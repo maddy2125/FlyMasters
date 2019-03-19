@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
 import { Profile } from '../Models/profile';
+import { User } from '../Models/user';
 
 const routes = {
   quote: (c: RandomQuoteContext) => `/jokes/random?category=${c.category}`
@@ -27,32 +28,7 @@ export class QuoteService {
         map((body: any) => body.value),
         catchError(() => of('Error, could not load joke :-('))
       );
-  }
-  /*GetPrifiles(): Observable<User[]> {
-    return this.httpClient
-      .cache()
-      .get('/profiles')
-      .pipe(
-        map((response:Response) => response.json()),
-        catchError(() => of('Error, could not load joke :-('))
-      );
-  }
-
-  GetPrifiles(): Observable<User> {
-    return this.httpClient.get('/profiles/4')
-        .map((response:Response) => response.json())
-            .catch((error:any) => Observable.throw(error.json().error || 'Server error'));
-  }
-
-  GetPrifiles(): Observable<User> {
-    return this.httpClient
-      .cache()
-      .get('api/profiles/4')
-      .pipe(
-        map((body: any) => body.json()),
-        catchError(() => of('Error, could not load joke :-('))
-      );
-  }*/
+  }  
 
   public GetPrifiles(): Observable<Profile[]> {
     const url = 'http://localhost:29224/api/profiles';
@@ -70,5 +46,11 @@ export class QuoteService {
     const url = 'http://localhost:29224/api/profiles/';   
 
     return this.httpClient.post(url,model);
+  }
+
+  public GetUsers(): Observable<User[]> {
+    const url = 'http://localhost:29224/api/getusers';
+
+    return this.httpClient.get<User[]>(url);
   }
 }

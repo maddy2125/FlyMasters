@@ -17,9 +17,11 @@ export class HomeComponent implements OnInit {
   isLoading: boolean;
   isEdit: boolean;
   leadData: Profile;
+  selectedUser: number;
+  
 
   constructor(private route: ActivatedRoute,private location: Location,private quoteService: QuoteService) {}
-
+  
   columnDefs = [
     {headerName: 'Select', field: 'ProfileID', width: 99, checkboxSelection: true },
 		{headerName: 'Profile ID', field: 'ProfileID', sortable: true, filter: true, width: 99 },
@@ -40,7 +42,8 @@ export class HomeComponent implements OnInit {
   ];
   
   rowData :any[];
-  rowNotesData :any[];  
+  rowNotesData :any[]; 
+  associates:any[]; 
 
   columnNotesDefs = [
 		{headerName: 'Added On', field: 'AddedOn', sortable: true, filter: true },
@@ -65,6 +68,18 @@ export class HomeComponent implements OnInit {
       .subscribe((quote: any[]) => {
         this.rowData = quote;
       });
+
+      this.quoteService
+      .GetUsers()
+      .pipe(
+        finalize(() => {
+          this.isLoading = false;
+        })
+      )
+      .subscribe((quote: any[]) => {
+        console.log(quote);
+        this.associates = quote;
+      });      
   }
 
   loadProfile(){
@@ -80,28 +95,48 @@ export class HomeComponent implements OnInit {
         console.log(quote.profileNotesViewModel[0]);
         this.rowNotesData = quote.profileNotesViewModel;
       });      
-}
+  }
 
-save(){
-  console.log(this.leadData);
-  this.quoteService
-      .UpdatePrifile(this.leadData)
-      .pipe(
-        finalize(() => {
-          this.isLoading = false;
-        })
-      )
-      .subscribe(
-        res => {
-          console.log(res);
-          location.href='/home';
-        },
-        err => {
-          console.log("Error occured");
-        }
-      );  
-}
-back(){
-  location.href='/home';
+  save(){
+    console.log(this.leadData);
+    this.quoteService
+        .UpdatePrifile(this.leadData)
+        .pipe(
+          finalize(() => {
+            this.isLoading = false;
+          })
+        )
+        .subscribe(
+          res => {
+            console.log(res);
+            location.href='/home';
+          },
+          err => {
+            console.log("Error occured");
+          }
+        );  
+  }
+  back(){
+    location.href='/home';
+  }
+  filterForeCasts(filterVal: any) {
+    this.selectedUser = filterVal;
+    console.log(this.selectedUser);
+    //console.log(this.associates.filter((item) => item.summary == filterVal));
+  }
+  RowClick(param: any) {  
+    var currentRowIndex = param.rowIndex;
+  }
+  assign(){
+    console.log(this.leadData);
+  }
+  onRowSelected(event: any){
+    console.log(event);
+    if(event.node.isSelected()){
+      console.log("selected");
+    } else {
+      event.node.setSelected(true);
+      console.log("unselected");
+    }    
 }
 }
