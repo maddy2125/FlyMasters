@@ -1,4 +1,12 @@
-<p>
-  <button class="btn-sm btn-primary " *ngIf="params.data.StatusID < 3" (click)="open()">Validate Profile</button>  &nbsp;
-  <button class="btn-sm btn-primary " *ngIf="params.data.StatusID > 2" (click)="lead()">Create Lead</button>   
-  </p>
+<div class="row">
+  <div *ngIf="params.data.StatusID < 3">
+    <button class="btn-sm btn-danger " width="100" (click)="open()">
+      &nbsp;&nbsp;&nbsp;Validate&nbsp;&nbsp;&nbsp;
+    </button>
+  </div>
+  <div *ngIf="params.data.StatusID > 2">
+    <button class="btn-sm btn-success " width="100" *ngIf="params.data.StatusID > 2" (click)="lead()">
+      Create Lead
+    </button>
+  </div>
+</div>

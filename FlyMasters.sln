@@ -15,6 +15,243 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FlyMasters.API", "FlyMasters.API\FlyMasters.API.csproj", "{49E533C0-C450-42C4-80B4-36799FD6CB73}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "FlyMastersUI", "FlyMastersUI", "{4F05DFBB-EADA-4317-89C9-985DDC6434B5}"
+	ProjectSection(SolutionItems) = preProject
+		FlyMastersUI\.editorconfig = FlyMastersUI\.editorconfig
+		FlyMastersUI\.gitignore = FlyMastersUI\.gitignore
+		FlyMastersUI\.htmlhintrc = FlyMastersUI\.htmlhintrc
+		FlyMastersUI\.stylelintrc = FlyMastersUI\.stylelintrc
+		FlyMastersUI\angular.json = FlyMastersUI\angular.json
+		FlyMastersUI\ngsw-config.json = FlyMastersUI\ngsw-config.json
+		FlyMastersUI\npm-shrinkwrap.json = FlyMastersUI\npm-shrinkwrap.json
+		FlyMastersUI\package.json = FlyMastersUI\package.json
+		FlyMastersUI\proxy.conf.js = FlyMastersUI\proxy.conf.js
+		FlyMastersUI\README.md = FlyMastersUI\README.md
+		FlyMastersUI\tsconfig.json = FlyMastersUI\tsconfig.json
+		FlyMastersUI\tslint.json = FlyMastersUI\tslint.json
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{B71A7B57-510E-4FFD-9E82-ADF0E270DCB8}"
+	ProjectSection(SolutionItems) = preProject
+		FlyMastersUI\docs\analytics.md = FlyMastersUI\docs\analytics.md
+		FlyMastersUI\docs\backend-proxy.md = FlyMastersUI\docs\backend-proxy.md
+		FlyMastersUI\docs\corporate-proxy.md = FlyMastersUI\docs\corporate-proxy.md
+		FlyMastersUI\docs\i18n.md = FlyMastersUI\docs\i18n.md
+		FlyMastersUI\docs\readme.md = FlyMastersUI\docs\readme.md
+		FlyMastersUI\docs\routing.md = FlyMastersUI\docs\routing.md
+		FlyMastersUI\docs\updating.md = FlyMastersUI\docs\updating.md
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "coding-guides", "coding-guides", "{BDED2FE3-E1CD-4F9F-82F4-D78815EAEDA5}"
+	ProjectSection(SolutionItems) = preProject
+		FlyMastersUI\docs\coding-guides\angular.md = FlyMastersUI\docs\coding-guides\angular.md
+		FlyMastersUI\docs\coding-guides\e2e-tests.md = FlyMastersUI\docs\coding-guides\e2e-tests.md
+		FlyMastersUI\docs\coding-guides\html.md = FlyMastersUI\docs\coding-guides\html.md
+		FlyMastersUI\docs\coding-guides\sass.md = FlyMastersUI\docs\coding-guides\sass.md
+		FlyMastersUI\docs\coding-guides\typescript.md = FlyMastersUI\docs\coding-guides\typescript.md
+		FlyMastersUI\docs\coding-guides\unit-tests.md = FlyMastersUI\docs\coding-guides\unit-tests.md
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "e2e", "e2e", "{A18502B3-4A40-416D-B029-C73E1D2D3EF0}"
+	ProjectSection(SolutionItems) = preProject
+		FlyMastersUI\e2e\protractor.conf.js = FlyMastersUI\e2e\protractor.conf.js
+		FlyMastersUI\e2e\tsconfig.e2e.json = FlyMastersUI\e2e\tsconfig.e2e.json
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{C43CA7B4-B687-48FA-8439-9C2C2AADD14A}"
+	ProjectSection(SolutionItems) = preProject
+		FlyMastersUI\e2e\src\app.e2e-spec.ts = FlyMastersUI\e2e\src\app.e2e-spec.ts
+		FlyMastersUI\e2e\src\app.po.ts = FlyMastersUI\e2e\src\app.po.ts
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{A9BBEA9B-83C2-4F7F-9838-AF6F3DBF5296}"
+	ProjectSection(SolutionItems) = preProject
+		FlyMastersUI\src\apple-touch-icon.png = FlyMastersUI\src\apple-touch-icon.png
+		FlyMastersUI\src\browserslist = FlyMastersUI\src\browserslist
+		FlyMastersUI\src\favicon.ico = FlyMastersUI\src\favicon.ico
+		FlyMastersUI\src\index.html = FlyMastersUI\src\index.html
+		FlyMastersUI\src\karma.conf.js = FlyMastersUI\src\karma.conf.js
+		FlyMastersUI\src\main.scss = FlyMastersUI\src\main.scss
+		FlyMastersUI\src\main.ts = FlyMastersUI\src\main.ts
+		FlyMastersUI\src\manifest.json = FlyMastersUI\src\manifest.json
+		FlyMastersUI\src\polyfills.ts = FlyMastersUI\src\polyfills.ts
+		FlyMastersUI\src\robots.txt = FlyMastersUI\src\robots.txt
+		FlyMastersUI\src\test.ts = FlyMastersUI\src\test.ts
+		FlyMastersUI\src\tsconfig.app.json = FlyMastersUI\src\tsconfig.app.json
+		FlyMastersUI\src\tsconfig.spec.json = FlyMastersUI\src\tsconfig.spec.json
+		FlyMastersUI\src\typings.d.ts = FlyMastersUI\src\typings.d.ts
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "app", "app", "{1A8B07AA-5EF4-4863-A23B-5718607C40A1}"
+	ProjectSection(SolutionItems) = preProject
+		FlyMastersUI\src\app\app-routing.module.ts = FlyMastersUI\src\app\app-routing.module.ts
+		FlyMastersUI\src\app\app.component.html = FlyMastersUI\src\app\app.component.html
+		FlyMastersUI\src\app\app.component.scss = FlyMastersUI\src\app\app.component.scss
+		FlyMastersUI\src\app\app.component.spec.ts = FlyMastersUI\src\app\app.component.spec.ts
+		FlyMastersUI\src\app\app.component.ts = FlyMastersUI\src\app\app.component.ts
+		FlyMastersUI\src\app\app.module.ts = FlyMastersUI\src\app\app.module.ts
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "assets", "assets", "{D748B3DD-E0E1-4A1C-9592-ABC313913156}"
+	ProjectSection(SolutionItems) = preProject
+		FlyMastersUI\src\assets\ngx-rocket-logo.png = FlyMastersUI\src\assets\ngx-rocket-logo.png
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "environments", "environments", "{0DBDE920-FDEA-4CB2-A055-20E0A6087279}"
+	ProjectSection(SolutionItems) = preProject
+		FlyMastersUI\src\environments\.env.ts = FlyMastersUI\src\environments\.env.ts
+		FlyMastersUI\src\environments\environment.prod.ts = FlyMastersUI\src\environments\environment.prod.ts
+		FlyMastersUI\src\environments\environment.ts = FlyMastersUI\src\environments\environment.ts
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "theme", "theme", "{C8B0752A-72B3-4BBA-8DDF-BF34895A2038}"
+	ProjectSection(SolutionItems) = preProject
+		FlyMastersUI\src\theme\theme-variables.scss = FlyMastersUI\src\theme\theme-variables.scss
+		FlyMastersUI\src\theme\theme.scss = FlyMastersUI\src\theme\theme.scss
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "translations", "translations", "{0AE9ADFB-31DB-4DA4-9F86-F949C8556C0B}"
+	ProjectSection(SolutionItems) = preProject
+		FlyMastersUI\src\translations\en-US.json = FlyMastersUI\src\translations\en-US.json
+		FlyMastersUI\src\translations\fr-FR.json = FlyMastersUI\src\translations\fr-FR.json
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "about", "about", "{6434FD72-ADAD-4ADA-A320-871C52682324}"
+	ProjectSection(SolutionItems) = preProject
+		FlyMastersUI\src\app\about\about-routing.module.ts = FlyMastersUI\src\app\about\about-routing.module.ts
+		FlyMastersUI\src\app\about\about.component.html = FlyMastersUI\src\app\about\about.component.html
+		FlyMastersUI\src\app\about\about.component.scss = FlyMastersUI\src\app\about\about.component.scss
+		FlyMastersUI\src\app\about\about.component.spec.ts = FlyMastersUI\src\app\about\about.component.spec.ts
+		FlyMastersUI\src\app\about\about.component.ts = FlyMastersUI\src\app\about\about.component.ts
+		FlyMastersUI\src\app\about\about.module.ts = FlyMastersUI\src\app\about\about.module.ts
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "core", "core", "{A5175692-2632-484D-97C9-D7FEAF5F9963}"
+	ProjectSection(SolutionItems) = preProject
+		FlyMastersUI\src\app\core\core.module.ts = FlyMastersUI\src\app\core\core.module.ts
+		FlyMastersUI\src\app\core\i18n.service.spec.ts = FlyMastersUI\src\app\core\i18n.service.spec.ts
+		FlyMastersUI\src\app\core\i18n.service.ts = FlyMastersUI\src\app\core\i18n.service.ts
+		FlyMastersUI\src\app\core\index.ts = FlyMastersUI\src\app\core\index.ts
+		FlyMastersUI\src\app\core\logger.service.spec.ts = FlyMastersUI\src\app\core\logger.service.spec.ts
+		FlyMastersUI\src\app\core\logger.service.ts = FlyMastersUI\src\app\core\logger.service.ts
+		FlyMastersUI\src\app\core\route-reusable-strategy.ts = FlyMastersUI\src\app\core\route-reusable-strategy.ts
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "custom-cell", "custom-cell", "{FA9A8F01-C144-4C1B-A135-FA5668378366}"
+	ProjectSection(SolutionItems) = preProject
+		FlyMastersUI\src\app\custom-cell\custom-cell.component.html = FlyMastersUI\src\app\custom-cell\custom-cell.component.html
+		FlyMastersUI\src\app\custom-cell\custom-cell.component.scss = FlyMastersUI\src\app\custom-cell\custom-cell.component.scss
+		FlyMastersUI\src\app\custom-cell\custom-cell.component.spec.ts = FlyMastersUI\src\app\custom-cell\custom-cell.component.spec.ts
+		FlyMastersUI\src\app\custom-cell\custom-cell.component.ts = FlyMastersUI\src\app\custom-cell\custom-cell.component.ts
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "datazone", "datazone", "{532B6659-C76B-44D3-A99A-BBAA77F0A362}"
+	ProjectSection(SolutionItems) = preProject
+		FlyMastersUI\src\app\datazone\celleditrenderingcomponent.ts = FlyMastersUI\src\app\datazone\celleditrenderingcomponent.ts
+		FlyMastersUI\src\app\datazone\datazone-routing.module.ts = FlyMastersUI\src\app\datazone\datazone-routing.module.ts
+		FlyMastersUI\src\app\datazone\datazone.component.html = FlyMastersUI\src\app\datazone\datazone.component.html
+		FlyMastersUI\src\app\datazone\datazone.component.scss = FlyMastersUI\src\app\datazone\datazone.component.scss
+		FlyMastersUI\src\app\datazone\datazone.component.spec.ts = FlyMastersUI\src\app\datazone\datazone.component.spec.ts
+		FlyMastersUI\src\app\datazone\datazone.component.ts = FlyMastersUI\src\app\datazone\datazone.component.ts
+		FlyMastersUI\src\app\datazone\datazone.module.ts = FlyMastersUI\src\app\datazone\datazone.module.ts
+		FlyMastersUI\src\app\datazone\datazone.service.ts = FlyMastersUI\src\app\datazone\datazone.service.ts
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "home", "home", "{A3249112-CC44-4CE2-BCE9-E40DD54403E2}"
+	ProjectSection(SolutionItems) = preProject
+		FlyMastersUI\src\app\home\celleditrenderingcomponent.ts = FlyMastersUI\src\app\home\celleditrenderingcomponent.ts
+		FlyMastersUI\src\app\home\home-routing.module.ts = FlyMastersUI\src\app\home\home-routing.module.ts
+		FlyMastersUI\src\app\home\home.component.html = FlyMastersUI\src\app\home\home.component.html
+		FlyMastersUI\src\app\home\home.component.scss = FlyMastersUI\src\app\home\home.component.scss
+		FlyMastersUI\src\app\home\home.component.spec.ts = FlyMastersUI\src\app\home\home.component.spec.ts
+		FlyMastersUI\src\app\home\home.component.ts = FlyMastersUI\src\app\home\home.component.ts
+		FlyMastersUI\src\app\home\home.module.ts = FlyMastersUI\src\app\home\home.module.ts
+		FlyMastersUI\src\app\home\quote.service.spec.ts = FlyMastersUI\src\app\home\quote.service.spec.ts
+		FlyMastersUI\src\app\home\quote.service.ts = FlyMastersUI\src\app\home\quote.service.ts
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "leads", "leads", "{973F7327-31FC-41E3-8A82-DD2A3525EA80}"
+	ProjectSection(SolutionItems) = preProject
+		FlyMastersUI\src\app\leads\leads-routing.module.ts = FlyMastersUI\src\app\leads\leads-routing.module.ts
+		FlyMastersUI\src\app\leads\leads.component.html = FlyMastersUI\src\app\leads\leads.component.html
+		FlyMastersUI\src\app\leads\leads.component.scss = FlyMastersUI\src\app\leads\leads.component.scss
+		FlyMastersUI\src\app\leads\leads.component.spec.ts = FlyMastersUI\src\app\leads\leads.component.spec.ts
+		FlyMastersUI\src\app\leads\leads.component.ts = FlyMastersUI\src\app\leads\leads.component.ts
+		FlyMastersUI\src\app\leads\leads.module.ts = FlyMastersUI\src\app\leads\leads.module.ts
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "login", "login", "{719CB627-EC0A-450F-8AFB-32C693151D34}"
+	ProjectSection(SolutionItems) = preProject
+		FlyMastersUI\src\app\login\login-routing.module.ts = FlyMastersUI\src\app\login\login-routing.module.ts
+		FlyMastersUI\src\app\login\login.component.html = FlyMastersUI\src\app\login\login.component.html
+		FlyMastersUI\src\app\login\login.component.scss = FlyMastersUI\src\app\login\login.component.scss
+		FlyMastersUI\src\app\login\login.component.spec.ts = FlyMastersUI\src\app\login\login.component.spec.ts
+		FlyMastersUI\src\app\login\login.component.ts = FlyMastersUI\src\app\login\login.component.ts
+		FlyMastersUI\src\app\login\login.module.ts = FlyMastersUI\src\app\login\login.module.ts
+		FlyMastersUI\src\app\login\login.service.ts = FlyMastersUI\src\app\login\login.service.ts
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Models", "Models", "{95D14367-EF25-4A4B-B3CB-3DC51D59640E}"
+	ProjectSection(SolutionItems) = preProject
+		FlyMastersUI\src\app\Models\profile.ts = FlyMastersUI\src\app\Models\profile.ts
+		FlyMastersUI\src\app\Models\user.ts = FlyMastersUI\src\app\Models\user.ts
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "shared", "shared", "{0B18799A-B087-4DA5-A1E6-F835A21E7A11}"
+	ProjectSection(SolutionItems) = preProject
+		FlyMastersUI\src\app\shared\index.ts = FlyMastersUI\src\app\shared\index.ts
+		FlyMastersUI\src\app\shared\shared.module.ts = FlyMastersUI\src\app\shared\shared.module.ts
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "shell", "shell", "{3F68BAAF-1E1E-47C1-969B-11BB2E05781E}"
+	ProjectSection(SolutionItems) = preProject
+		FlyMastersUI\src\app\shell\shell.component.html = FlyMastersUI\src\app\shell\shell.component.html
+		FlyMastersUI\src\app\shell\shell.component.scss = FlyMastersUI\src\app\shell\shell.component.scss
+		FlyMastersUI\src\app\shell\shell.component.spec.ts = FlyMastersUI\src\app\shell\shell.component.spec.ts
+		FlyMastersUI\src\app\shell\shell.component.ts = FlyMastersUI\src\app\shell\shell.component.ts
+		FlyMastersUI\src\app\shell\shell.module.spec.ts = FlyMastersUI\src\app\shell\shell.module.spec.ts
+		FlyMastersUI\src\app\shell\shell.module.ts = FlyMastersUI\src\app\shell\shell.module.ts
+		FlyMastersUI\src\app\shell\shell.service.spec.ts = FlyMastersUI\src\app\shell\shell.service.spec.ts
+		FlyMastersUI\src\app\shell\shell.service.ts = FlyMastersUI\src\app\shell\shell.service.ts
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "http", "http", "{E0E0DBD8-8918-4226-8EC7-CBF57CCCD818}"
+	ProjectSection(SolutionItems) = preProject
+		FlyMastersUI\src\app\core\http\api-prefix.interceptor.spec.ts = FlyMastersUI\src\app\core\http\api-prefix.interceptor.spec.ts
+		FlyMastersUI\src\app\core\http\api-prefix.interceptor.ts = FlyMastersUI\src\app\core\http\api-prefix.interceptor.ts
+		FlyMastersUI\src\app\core\http\cache.interceptor.spec.ts = FlyMastersUI\src\app\core\http\cache.interceptor.spec.ts
+		FlyMastersUI\src\app\core\http\cache.interceptor.ts = FlyMastersUI\src\app\core\http\cache.interceptor.ts
+		FlyMastersUI\src\app\core\http\error-handler.interceptor.spec.ts = FlyMastersUI\src\app\core\http\error-handler.interceptor.spec.ts
+		FlyMastersUI\src\app\core\http\error-handler.interceptor.ts = FlyMastersUI\src\app\core\http\error-handler.interceptor.ts
+		FlyMastersUI\src\app\core\http\http-cache.service.spec.ts = FlyMastersUI\src\app\core\http\http-cache.service.spec.ts
+		FlyMastersUI\src\app\core\http\http-cache.service.ts = FlyMastersUI\src\app\core\http\http-cache.service.ts
+		FlyMastersUI\src\app\core\http\http.service.spec.ts = FlyMastersUI\src\app\core\http\http.service.spec.ts
+		FlyMastersUI\src\app\core\http\http.service.ts = FlyMastersUI\src\app\core\http\http.service.ts
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "authentication", "authentication", "{B096D9B2-C780-42CA-BC69-0B9EFE086082}"
+	ProjectSection(SolutionItems) = preProject
+		FlyMastersUI\src\app\core\authentication\authentication.guard.spec.ts = FlyMastersUI\src\app\core\authentication\authentication.guard.spec.ts
+		FlyMastersUI\src\app\core\authentication\authentication.guard.ts = FlyMastersUI\src\app\core\authentication\authentication.guard.ts
+		FlyMastersUI\src\app\core\authentication\authentication.service.mock.ts = FlyMastersUI\src\app\core\authentication\authentication.service.mock.ts
+		FlyMastersUI\src\app\core\authentication\authentication.service.spec.ts = FlyMastersUI\src\app\core\authentication\authentication.service.spec.ts
+		FlyMastersUI\src\app\core\authentication\authentication.service.ts = FlyMastersUI\src\app\core\authentication\authentication.service.ts
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "loader", "loader", "{95724108-6CA7-4B37-B614-EBAFB46F8DDC}"
+	ProjectSection(SolutionItems) = preProject
+		FlyMastersUI\src\app\shared\loader\loader.component.html = FlyMastersUI\src\app\shared\loader\loader.component.html
+		FlyMastersUI\src\app\shared\loader\loader.component.scss = FlyMastersUI\src\app\shared\loader\loader.component.scss
+		FlyMastersUI\src\app\shared\loader\loader.component.spec.ts = FlyMastersUI\src\app\shared\loader\loader.component.spec.ts
+		FlyMastersUI\src\app\shared\loader\loader.component.ts = FlyMastersUI\src\app\shared\loader\loader.component.ts
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "header", "header", "{B669AD9A-C013-49CD-A570-8EF42D130B57}"
+	ProjectSection(SolutionItems) = preProject
+		FlyMastersUI\src\app\shell\header\header.component.html = FlyMastersUI\src\app\shell\header\header.component.html
+		FlyMastersUI\src\app\shell\header\header.component.scss = FlyMastersUI\src\app\shell\header\header.component.scss
+		FlyMastersUI\src\app\shell\header\header.component.spec.ts = FlyMastersUI\src\app\shell\header\header.component.spec.ts
+		FlyMastersUI\src\app\shell\header\header.component.ts = FlyMastersUI\src\app\shell\header\header.component.ts
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +270,32 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{B71A7B57-510E-4FFD-9E82-ADF0E270DCB8} = {4F05DFBB-EADA-4317-89C9-985DDC6434B5}
+		{BDED2FE3-E1CD-4F9F-82F4-D78815EAEDA5} = {B71A7B57-510E-4FFD-9E82-ADF0E270DCB8}
+		{A18502B3-4A40-416D-B029-C73E1D2D3EF0} = {4F05DFBB-EADA-4317-89C9-985DDC6434B5}
+		{C43CA7B4-B687-48FA-8439-9C2C2AADD14A} = {A18502B3-4A40-416D-B029-C73E1D2D3EF0}
+		{A9BBEA9B-83C2-4F7F-9838-AF6F3DBF5296} = {4F05DFBB-EADA-4317-89C9-985DDC6434B5}
+		{1A8B07AA-5EF4-4863-A23B-5718607C40A1} = {A9BBEA9B-83C2-4F7F-9838-AF6F3DBF5296}
+		{D748B3DD-E0E1-4A1C-9592-ABC313913156} = {A9BBEA9B-83C2-4F7F-9838-AF6F3DBF5296}
+		{0DBDE920-FDEA-4CB2-A055-20E0A6087279} = {A9BBEA9B-83C2-4F7F-9838-AF6F3DBF5296}
+		{C8B0752A-72B3-4BBA-8DDF-BF34895A2038} = {A9BBEA9B-83C2-4F7F-9838-AF6F3DBF5296}
+		{0AE9ADFB-31DB-4DA4-9F86-F949C8556C0B} = {A9BBEA9B-83C2-4F7F-9838-AF6F3DBF5296}
+		{6434FD72-ADAD-4ADA-A320-871C52682324} = {1A8B07AA-5EF4-4863-A23B-5718607C40A1}
+		{A5175692-2632-484D-97C9-D7FEAF5F9963} = {1A8B07AA-5EF4-4863-A23B-5718607C40A1}
+		{FA9A8F01-C144-4C1B-A135-FA5668378366} = {1A8B07AA-5EF4-4863-A23B-5718607C40A1}
+		{532B6659-C76B-44D3-A99A-BBAA77F0A362} = {1A8B07AA-5EF4-4863-A23B-5718607C40A1}
+		{A3249112-CC44-4CE2-BCE9-E40DD54403E2} = {1A8B07AA-5EF4-4863-A23B-5718607C40A1}
+		{973F7327-31FC-41E3-8A82-DD2A3525EA80} = {1A8B07AA-5EF4-4863-A23B-5718607C40A1}
+		{719CB627-EC0A-450F-8AFB-32C693151D34} = {1A8B07AA-5EF4-4863-A23B-5718607C40A1}
+		{95D14367-EF25-4A4B-B3CB-3DC51D59640E} = {1A8B07AA-5EF4-4863-A23B-5718607C40A1}
+		{0B18799A-B087-4DA5-A1E6-F835A21E7A11} = {1A8B07AA-5EF4-4863-A23B-5718607C40A1}
+		{3F68BAAF-1E1E-47C1-969B-11BB2E05781E} = {1A8B07AA-5EF4-4863-A23B-5718607C40A1}
+		{E0E0DBD8-8918-4226-8EC7-CBF57CCCD818} = {A5175692-2632-484D-97C9-D7FEAF5F9963}
+		{B096D9B2-C780-42CA-BC69-0B9EFE086082} = {A5175692-2632-484D-97C9-D7FEAF5F9963}
+		{95724108-6CA7-4B37-B614-EBAFB46F8DDC} = {0B18799A-B087-4DA5-A1E6-F835A21E7A11}
+		{B669AD9A-C013-49CD-A570-8EF42D130B57} = {3F68BAAF-1E1E-47C1-969B-11BB2E05781E}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {7F4155CB-AA61-4E97-81B3-0E780EE1857E}

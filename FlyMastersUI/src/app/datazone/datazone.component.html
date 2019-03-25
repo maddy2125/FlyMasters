@@ -1,0 +1,154 @@
+<div class="container-fluid d-flex justify-content-center" *ngIf="!isEdit">
+  <div class="col-lg-12">
+    <div class="row">
+      <div class="col-lg-3">
+        &nbsp;
+      </div>
+      <div class="col-lg-4 ">
+        <div class="row d-flex justify-content-left">
+          <div>
+            <input type="file" class="form-control" id="customFile" (change)="selectFile($event)" accept=".csv" />
+          </div>
+          <div>
+            &nbsp;
+          </div>
+          <div>
+            <button [disabled]="!selectedFiles" (click)="upload()" class="btn btn-primary">Upload</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-3 pull-right">
+        <div class="row">
+          <div ngbDropdown>
+            <button class="btn btn-outline-primary" id="dropdownConfig" ngbDropdownToggle>
+              <div ngbDropdownMenu class="dropdown show" aria-labelledby="language-dropdown">
+                <select (change)="filterForeCasts($event.target.value)">
+                  <option value="0">--Select User--</option>
+                  <option *ngFor="let associate of associates" value="{{ associate.UserId }}">
+                    {{ associate.UserName }}
+                  </option>
+                </select>
+              </div>
+            </button>
+          </div>
+          <div>
+            &nbsp;
+          </div>
+          <button type="button" (click)="assign()" class="btn btn-primary">Assign</button>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      &nbsp;
+    </div>
+  </div>
+</div>
+<div class="container-fluid" *ngIf="!isEdit">
+  <!-- <div class="jumbotron text-center"> -->
+
+  <app-loader [isLoading]="isLoading"></app-loader>
+  <div id="agGrid">
+    <ag-grid-angular
+      #dzgrid
+      style="width: 100%; height: 530px;"
+      class="ag-theme-balham"
+      [rowHeight]="35"
+      [rowData]="rowData"
+      [columnDefs]="columnDefs"
+      pagination="true"
+      rowSelection="multiple"
+      rowDeselection="true"
+      suppressRowClickSelection="true"
+      (rowSelected)="onRowSelected($event)"
+      paginationPageSize="13"
+    >
+    </ag-grid-angular>
+  </div>
+</div>
+<div *ngIf="isEdit">
+  <div class="modal-header  d-flex justify-content-center">
+    <h4 class="modal-title">Profile Validate</h4>
+  </div>
+  <div class="modal-body">
+    <div class="form-group col-md-12 d-flex justify-content-center">
+      <div class="form-row">
+        <form>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="inputFirstName"><b>First Name</b></label>
+              <input
+                type="text"
+                class="form-control"
+                id="inputFirstName"
+                [(ngModel)]="leadData.FirstName"
+                name="firstname"
+                placeholder="First Name"
+              />
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="inputLastName"><b>Last Name</b></label>
+              <input
+                type="text"
+                class="form-control"
+                id="inputLastName"
+                [(ngModel)]="leadData.LastName"
+                name="lastname"
+                placeholder="Last Name"
+              />
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="inputPhone"><b>Phone</b></label>
+              <input
+                type="text"
+                class="form-control"
+                id="inputPhone"
+                [(ngModel)]="leadData.Phone"
+                name="phone"
+                placeholder="111 111-1111"
+              />
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <label for="inputEmail"><b>Email</b></label>
+              <input type="text" class="form-control" id="inputEmail" [(ngModel)]="leadData.Email" name="email" />
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <label for="inputNotes"><b>Notes</b></label>
+              <input type="text" class="form-control" id="inputNotes" [(ngModel)]="leadData.Notes" name="notes" />
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <label for="inputNotes"><b>Previous Notes:</b></label>
+              <div id="agNotesGrid">
+                <ag-grid-angular
+                  style="width: 100%; height: auto;"
+                  class="ag-theme-balham"
+                  [rowData]="rowNotesData"
+                  [columnDefs]="columnNotesDefs"
+                  pagination="true"
+                  paginationPageSize="15"
+                >
+                </ag-grid-angular>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+    <div class="form-group col-md-4"></div>
+  </div>
+  <div class="modal-footer  d-flex justify-content-center">
+    <button type="submit" (click)="save()" class="btn btn-primary">Save</button>
+    <button type="button" *ngIf="isEdit" class="btn btn-outline-dark" (click)="back()">InComplete Details</button>
+    <button type="button" class="btn btn-outline-dark" (click)="back()">Back</button>
+  </div>
+</div>

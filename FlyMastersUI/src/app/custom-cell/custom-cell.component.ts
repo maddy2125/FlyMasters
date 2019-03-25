@@ -5,8 +5,6 @@ import { Location, LocationStrategy, PathLocationStrategy } from '@angular/commo
 //import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Profile } from '@app/Models/profile';
 
-
-
 /*
 @Component({
   template: `
@@ -78,39 +76,36 @@ export class NgbdModal1Content {
   styleUrls: ['./custom-cell.component.scss']
 })
 export class CustomCellComponent implements OnInit {
-data:any;
-params:any;
-isLoading: boolean;
-leadData: Profile;
-firstName1: string;
-parentMessage: string;
-@Input() childMessage: any;
+  data: any;
+  params: any;
+  isLoading: boolean;
+  leadData: Profile;
+  firstName1: string;
+  parentMessage: string;
+  @Input() childMessage: any;
 
-
-  constructor(private location: Location,private quoteService: QuoteService) { }
-  agInit(params:any):void {
-    this.params=params;
+  constructor(private location: Location, private quoteService: QuoteService) {}
+  agInit(params: any): void {
+    this.params = params;
     //console.log(params.data.StatusID);
     this.data = params.value;
-}
-ngOnInit() {
-  this.firstName1 = "madhu";
+  }
+  ngOnInit() {
+    this.firstName1 = 'madhu';
   }
   open() {
-//this.loadProfile();
-   // this.modalService.open(NgbdModal1Content);
-   
-   location.href='/home?id='+this.data;
-  
-}
-lead() {
-  //this.loadProfile();
-     // this.modalService.open(NgbdModal1Content);
-     
-     location.href='/home?id='+this.data;
-    
+    //this.loadProfile();
+    // this.modalService.open(NgbdModal1Content);
+
+    location.href = '/datazone?id=' + this.data;
   }
-  loadProfile(){
+  lead() {
+    //this.loadProfile();
+    // this.modalService.open(NgbdModal1Content);
+
+    location.href = '/datazone?id=' + this.data;
+  }
+  loadProfile() {
     this.quoteService
       .GetPrifileById(this.data)
       .pipe(
@@ -121,9 +116,8 @@ lead() {
       .subscribe((quote: any) => {
         //this.quote = quote;
         this.leadData = quote;
-        this.childMessage=this.leadData.FirstName;
+        this.childMessage = this.leadData.FirstName;
         console.log(this.leadData);
       });
   }
-
 }

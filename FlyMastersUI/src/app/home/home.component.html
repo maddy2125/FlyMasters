@@ -1,11 +1,8 @@
 <div class="container-fluid">
   <div class="jumbotron text-center">
     <app-loader [isLoading]="isLoading"></app-loader>
-    <div ngbDropdownMenu aria-labelledby="language-dropdown">
-     <!-- <button class="dropdown-item" *ngFor="let associate of associates" >
-        {{associate}}
-      </button>-->
-      <select (change)="filterForeCasts($event.target.value)">
+    <!-- <div ngbDropdownMenu aria-labelledby="language-dropdown">
+    <select (change)="filterForeCasts($event.target.value)">
       <option value="0">--All--</option>
       <option *ngFor="let associate of associates" value={{associate.UserId}}>
           {{associate.UserName}}
@@ -32,10 +29,7 @@
   
   <div class="modal-header">
     <h4 class="modal-title">Profile Validate</h4>
-    <!-- <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
-      <span aria-hidden="true">&times;</span>
-    </button> -->
-  </div>
+     </div>
   <div class="modal-body">
     <div class="form-row">
         <div class="form-group col-md-6">
@@ -92,6 +86,8 @@
   <button type="button" *ngIf="isEdit" class="btn btn-outline-dark" (click)="back()">InComplete Details</button>
     <button type="button" class="btn btn-outline-dark" (click)="back()">Back</button>
   </div>
-</div>
+</div> -->
+
+    Dashboard page Under Construction......
   </div>
 </div>

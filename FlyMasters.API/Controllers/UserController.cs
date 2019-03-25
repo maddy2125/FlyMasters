@@ -41,7 +41,7 @@ namespace FlyMasters.API.Controllers
             return new LoginModel { };
         }
 
-        [Route("Api/UserLogin")]
+        [Route("Api/Login")]
         [HttpPost]
         public LoginModel Login(LoginModel Lg)
         {

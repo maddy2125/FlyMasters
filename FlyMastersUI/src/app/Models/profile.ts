@@ -1,13 +1,13 @@
-export class Profile {
-  public ProfileID: number;
+export interface Profile {
+  ProfileID: number;
 
-  public FirstName: string;
+  FirstName: string;
 
-  public LastName: string;
+  LastName: string;
 
-  public Phone: string;
+  Phone: string;
 
-  public Email: string;
+  Email: string;
 
-  public Status: string;
+  Status: string;
 }

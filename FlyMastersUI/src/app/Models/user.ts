@@ -1,12 +1,10 @@
-export class User {
-    public UserId: number;
-  
-    public FirstName: string;
-  
-    public LastName: string;
-  
-    public UserName: string;
-  
-    
-  }
-  
+export interface User {
+  UserId: number;
+
+  FirstName: string;
+
+  LastName: string;
+
+  UserName: string;
+  Password: string;
+}

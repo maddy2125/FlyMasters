@@ -13,12 +13,14 @@ import { HomeModule } from './home/home.module';
 import { ShellModule } from './shell/shell.module';
 import { AboutModule } from './about/about.module';
 import { LoginModule } from './login/login.module';
+import { DataZoneModule } from './datazone/datazone.module';
+import { LeadsModule } from './leads/leads.module';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { CustomCellComponent } from './custom-cell/custom-cell.component';
+
+//import { DatazoneComponent } from './datazone/datazone.component';
 //import { CellEditRenderingComponent } from "./home/celleditrenderingcomponent";
-
-
 
 @NgModule({
   imports: [
@@ -34,8 +36,9 @@ import { CustomCellComponent } from './custom-cell/custom-cell.component';
     HomeModule,
     AboutModule,
     LoginModule,
+    DataZoneModule,
+    LeadsModule,
     AppRoutingModule // must be imported as the last module as it contains the fallback route
-    
   ],
   declarations: [AppComponent, CustomCellComponent],
   providers: [],

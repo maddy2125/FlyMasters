@@ -18,3 +18,16 @@
 
 // Theme customization
 @import "theme/theme";
+.ag-theme-balham .ag-header-cell-label .ag-header-cell-text {
+  display: inline-block;
+  text-align: center;
+}
+.ag-theme-balham .ag-header-cell-label .ag-header-icon {
+  vertical-align: top;
+}
+.ag-theme-balham .ag-header-cell-label > span {
+  float: none;
+}
+.ag-paging-panel {
+  color: black;
+}
