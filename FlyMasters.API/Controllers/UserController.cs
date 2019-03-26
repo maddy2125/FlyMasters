@@ -65,9 +65,11 @@ namespace FlyMasters.API.Controllers
                         else if (obj.Password == Lg.Password)
                         {
                             Lg.Status = "Success"; Lg.Message = string.Empty;
-                            Lg.PrivilegeIds = 
-                                _db.tblUserPrivileges.Where(x => x.UserID == obj.UserID)
-                                .Select(x => x.PrivilegeID).ToArray();
+
+                           int adminPrivId = _db.tblPrivileges.Where(x => x.PrivilegeName == "Admin").FirstOrDefault().PrivilegeID;
+
+                            if (obj.tblUserPrivileges.Where(x => x.PrivilegeID == adminPrivId).Count() > 0)
+                                Lg.IsAdmin = true;
                         }
                         else
                         {
