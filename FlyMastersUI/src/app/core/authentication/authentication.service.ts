@@ -4,9 +4,11 @@ import { Observable, of } from 'rxjs';
 
 export interface Credentials {
   // Customize received credentials here
-  username: string;
+  UserName: string;
   Status: string;
   token: string;
+  IsAdmin: boolean;
+  UserId: number;
 }
 
 export interface LoginContext {

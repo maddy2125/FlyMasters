@@ -6,6 +6,7 @@ import { CellEditRenderingComponent } from '../home/celleditrenderingcomponent';
 import { CustomCellComponent } from '../custom-cell/custom-cell.component';
 import { Location, LocationStrategy, PathLocationStrategy } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
+import { AuthenticationService } from '@app/core';
 
 @Component({
   selector: 'app-datazone',
@@ -20,8 +21,14 @@ export class DatazoneComponent implements OnInit {
   selectedUser: number;
   selectedFiles: FileList;
   currentFileUpload: File;
+  isAdmin: boolean;
 
-  constructor(private route: ActivatedRoute, private location: Location, private quoteService: DataZoneService) {}
+  constructor(
+    private route: ActivatedRoute,
+    private location: Location,
+    private quoteService: DataZoneService,
+    private authenticationService: AuthenticationService
+  ) {}
 
   columnDefs = [
     { headerName: 'ProfileID', field: 'ProfileID', width: 120, headerCheckboxSelection: true, checkboxSelection: true },
@@ -56,6 +63,8 @@ export class DatazoneComponent implements OnInit {
   ngOnInit() {
     console.log(this.route.snapshot.queryParams['id']);
     this.isEdit = this.route.snapshot.queryParams['id'] != undefined ? true : false;
+    this.isAdmin = this.authenticationService.credentials.IsAdmin;
+    //console.log(this.isAdmin);
     if (this.isEdit) {
       this.loadProfile();
     }
@@ -96,8 +105,9 @@ export class DatazoneComponent implements OnInit {
       )
       .subscribe((quote: any) => {
         this.leadData = quote;
-        console.log(quote.profileNotesViewModel[0]);
         this.rowNotesData = quote.profileNotesViewModel;
+        //console.log('Is Authenticated: '+this.authenticationService.isAuthenticated());
+        //console.log('Login: '+this.authenticationService.credentials.UserId);
       });
   }
 

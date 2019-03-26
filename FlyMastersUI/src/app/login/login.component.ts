@@ -44,13 +44,14 @@ export class LoginComponent implements OnInit {
       .subscribe(
         credentials => {
           if (credentials.Status == 'Success') {
-            log.debug(`${credentials.username} successfully logged in`);
+            console.log(credentials);
+            log.debug(`${credentials.UserName} successfully logged in`);
             this.authenticationService.setCredentials(credentials, true);
             this.route.queryParams.subscribe(params =>
               this.router.navigate([params.redirect || '/'], { replaceUrl: true })
             );
           } else {
-            log.debug(`${credentials.username} failed logged in`);
+            log.debug(`${credentials.UserName} failed logged in`);
             this.error = 'failed logged in';
             this.route.queryParams.subscribe(params =>
               this.router.navigate([params.redirect || '/'], { replaceUrl: true })

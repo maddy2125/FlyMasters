@@ -64,7 +64,7 @@ namespace FlyMasters.API.Controllers
                         }
                         else if (obj.Password == Lg.Password)
                         {
-                            Lg.Status = "Success"; Lg.Message = string.Empty;
+                            Lg.Status = "Success"; Lg.Message = string.Empty; Lg.UserId = obj.UserID;
 
                            int adminPrivId = _db.tblPrivileges.Where(x => x.PrivilegeName == "Admin").FirstOrDefault().PrivilegeID;
 
@@ -82,7 +82,7 @@ namespace FlyMasters.API.Controllers
             {
                 Lg.Status = "Error"; Lg.Message = ex.Message;
             }
-
+            Lg.Password = string.Empty;
             return Lg;
         }
         //// GET: api/User

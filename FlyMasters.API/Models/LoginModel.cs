@@ -16,5 +16,7 @@ namespace FlyMasters.API.ViewModels
         public string Message { get; set; }
 
         public bool IsAdmin { get; set; }
+
+        public int UserId { get; set; }
     }
 }

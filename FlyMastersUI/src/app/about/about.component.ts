@@ -6,8 +6,6 @@ import { Profile } from '@app/Models/profile';
 import { Location, LocationStrategy, PathLocationStrategy } from '@angular/common';
 import { environment } from '@env/environment';
 
-
-
 @Component({
   selector: 'app-about',
   templateUrl: './about.component.html',
@@ -16,20 +14,18 @@ import { environment } from '@env/environment';
 export class AboutComponent implements OnInit {
   version: string = environment.version;
 
-  constructor(private route: ActivatedRoute,private location: Location,private quoteService: QuoteService) {}
-
+  constructor(private route: ActivatedRoute, private location: Location, private quoteService: QuoteService) {}
 
   order: any;
- isLoading: boolean;
- leadData: Profile;
+  isLoading: boolean;
+  leadData: Profile;
   ngOnInit() {
-    console.log(this.route.snapshot.queryParams["id"]);
+    console.log(this.route.snapshot.queryParams['id']);
     this.loadProfile();
- 
   }
-  loadProfile(){
+  loadProfile() {
     this.quoteService
-      .GetPrifileById(this.route.snapshot.queryParams["id"])
+      .GetPrifileById(this.route.snapshot.queryParams['id'])
       .pipe(
         finalize(() => {
           this.isLoading = false;
@@ -39,13 +35,12 @@ export class AboutComponent implements OnInit {
         //this.quote = quote;
         this.leadData = quote;
         console.log(this.leadData);
-        
-      });      
-}
+      });
+  }
 
-save(){
-  console.log(this.leadData);
-  this.quoteService
+  save() {
+    console.log(this.leadData);
+    this.quoteService
       .UpdatePrifile(this.leadData)
       .pipe(
         finalize(() => {
@@ -55,15 +50,14 @@ save(){
       .subscribe(
         res => {
           console.log(res);
-          location.href='/home';
+          location.href = '/home';
         },
         err => {
-          console.log("Error occured");
+          console.log('Error occured');
         }
       );
-  
-}
-back(){
-  location.href='/home';
-}
+  }
+  back() {
+    location.href = '/home';
+  }
 }

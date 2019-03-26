@@ -8,9 +8,8 @@ describe('CustomCellComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ CustomCellComponent ]
-    })
-    .compileComponents();
+      declarations: [CustomCellComponent]
+    }).compileComponents();
   }));
 
   beforeEach(() => {

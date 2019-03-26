@@ -28,7 +28,7 @@ export class QuoteService {
         map((body: any) => body.value),
         catchError(() => of('Error, could not load joke :-('))
       );
-  }  
+  }
 
   public GetPrifiles(): Observable<Profile[]> {
     const url = 'http://localhost:29224/api/profiles';
@@ -36,16 +36,16 @@ export class QuoteService {
     return this.httpClient.get<Profile[]>(url);
   }
 
-  public GetPrifileById(id:any): Observable<Profile> {
-    const url = 'http://localhost:29224/api/profiles/'+ id;
+  public GetPrifileById(id: any): Observable<Profile> {
+    const url = 'http://localhost:29224/api/profiles/' + id;
 
     return this.httpClient.get<Profile>(url);
   }
 
-  public UpdatePrifile(model:any) {
-    const url = 'http://localhost:29224/api/profiles/';   
+  public UpdatePrifile(model: any) {
+    const url = 'http://localhost:29224/api/profiles/';
 
-    return this.httpClient.post(url,model);
+    return this.httpClient.post(url, model);
   }
 
   public GetUsers(): Observable<User[]> {

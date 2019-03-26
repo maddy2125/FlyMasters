@@ -9,9 +9,8 @@ import { HomeComponent } from './home.component';
 import { QuoteService } from './quote.service';
 import { AgGridModule } from 'ag-grid-angular';
 //import {AgGridModule} from "ag-grid-angular/main";
-import { CellEditRenderingComponent } from "./celleditrenderingcomponent";
+import { CellEditRenderingComponent } from './celleditrenderingcomponent';
 import { FormsModule } from '@angular/forms';
-
 
 @NgModule({
   imports: [
@@ -20,11 +19,11 @@ import { FormsModule } from '@angular/forms';
     CoreModule,
     SharedModule,
     HomeRoutingModule,
-    AgGridModule.withComponents([])
+    AgGridModule.withComponents([]),
     //,ClickableModule
-    ,FormsModule
+    FormsModule
   ],
-  declarations: [HomeComponent,CellEditRenderingComponent],
-  providers: [QuoteService,CellEditRenderingComponent]
+  declarations: [HomeComponent, CellEditRenderingComponent],
+  providers: [QuoteService, CellEditRenderingComponent]
 })
 export class HomeModule {}
