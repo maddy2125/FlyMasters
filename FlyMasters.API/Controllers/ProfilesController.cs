@@ -17,27 +17,51 @@ namespace FlyMasters.API.Controllers
         private FLYMASTERSContext _db;
 
         // GET: api/Profiles
-        public IEnumerable<DataZoneViewModel> Get()
+        public IEnumerable<DataZoneViewModel> Get(string userId, bool isAdmin)
         {
             _db = new FLYMASTERSContext();
+            if (isAdmin)
+            {
+                var profiles = (from p in _db.tblProfiles
+                                select p).Select(x => new DataZoneViewModel
+                                {
+                                    CreateDate = x.CreateDate.Value,
+                                    Email = x.Email,
+                                    FirstName = x.FirstName,
+                                    LastName = x.LastName,
+                                    Phone = x.Phone,
+                                    ProfileID = x.ProfileID,
+                                    StatusID = x.Status.Value,
+                                    Status = x.tblStatus.StatusName,
+                                    Source = _db.tblSources.Where(t => t.SourceId == x.tblImport.SourceID).FirstOrDefault().SourceName,
+                                    AssignedTo = _db.tblLeads.Where(t => t.ProfileID == x.ProfileID && t.IsActive == true).FirstOrDefault().tblUser1.UserName
+                                }).OrderByDescending(x => x.CreateDate);
 
-            var profiles = (from p in _db.tblProfiles
-                            join i in _db.tblImports on p.ImportID equals i.ImportID
-                            select p).Select(x => new DataZoneViewModel
-                            {
-                                CreateDate = x.CreateDate.Value,
-                                Email = x.Email,
-                                FirstName = x.FirstName,
-                                LastName = x.LastName,
-                                Phone = x.Phone,
-                                ProfileID = x.ProfileID,
-                                StatusID = x.Status.Value,
-                                Status = x.tblStatus.StatusName,
-                                Source = _db.tblSources.Where(t => t.SourceId == x.tblImport.SourceID).FirstOrDefault().SourceName
-                                , AssignedTo = _db.tblLeads.Where(t => t.ProfileID == x.ProfileID && t.IsActive == true).FirstOrDefault().tblUser1.UserName
-                            }).OrderByDescending(x => x.CreateDate);
+                return profiles;
+            }
+            else {
+                var UID = int.Parse(userId);
+                var profiles = (from p in _db.tblProfiles
+                                from l in _db.tblLeads
+                                where l.ProfileID == p.ProfileID
+                                && l.MappedUserID == UID
+                               && l.IsActive == true
+                                select p).Select(x => new DataZoneViewModel
+                                {
+                                    CreateDate = x.CreateDate.Value,
+                                    Email = x.Email,
+                                    FirstName = x.FirstName,
+                                    LastName = x.LastName,
+                                    Phone = x.Phone,
+                                    ProfileID = x.ProfileID,
+                                    StatusID = x.Status.Value,
+                                    Status = x.tblStatus.StatusName,
+                                    Source = _db.tblSources.Where(t => t.SourceId == x.tblImport.SourceID).FirstOrDefault().SourceName,
+                                    AssignedTo = _db.tblLeads.Where(t => t.ProfileID == x.ProfileID && t.IsActive == true).FirstOrDefault().tblUser1.UserName
+                                }).OrderByDescending(x => x.CreateDate);
 
-            return profiles;
+                return profiles;
+            }
         }
 
         // GET: api/Profiles/5
@@ -77,7 +101,7 @@ namespace FlyMasters.API.Controllers
 
         // POST: api/Profiles
         [HttpPost]
-        
+
         public HttpStatusCode Post(ProfileEditModel editModel)
         {
             try
@@ -125,7 +149,8 @@ namespace FlyMasters.API.Controllers
         }
 
         [HttpPost]
-        public HttpStatusCode SaveComments(int userId, int profileId, string comments) {
+        public HttpStatusCode SaveComments(int userId, int profileId, string comments)
+        {
             try
             {
                 _db = new FLYMASTERSContext();
@@ -133,7 +158,8 @@ namespace FlyMasters.API.Controllers
 
                 tblProfileNote notes;
 
-                if (!string.IsNullOrEmpty(comments)) {
+                if (!string.IsNullOrEmpty(comments))
+                {
                     notes = new tblProfileNote();
                     notes.ProfileId = profileId;
                     notes.Description = comments;
@@ -150,7 +176,7 @@ namespace FlyMasters.API.Controllers
             catch (Exception ex)
             {
                 return HttpStatusCode.InternalServerError;
-            }            
+            }
         }
 
         // PUT: api/Profiles/5

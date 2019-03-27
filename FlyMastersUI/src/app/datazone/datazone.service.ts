@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
 import { Profile } from '../Models/profile';
@@ -19,10 +19,15 @@ export class DataZoneService {
   constructor(private httpClient: HttpClient) {}
 
   result: string[];
-  public GetPrifiles(): Observable<Profile[]> {
+  public GetPrifiles(model: any): Observable<Profile[]> {
     const url = 'http://localhost:29224/api/profiles';
+    // Initialize Params Object
+    let Params = new HttpParams();
 
-    return this.httpClient.get<Profile[]>(url);
+    // Begin assigning parameters
+    Params = Params.append('userId', model.UserId);
+    Params = Params.append('isAdmin', model.IsAdmin);
+    return this.httpClient.get<Profile[]>(url, { params: Params });
   }
 
   public GetPrifileById(id: any): Observable<Profile> {

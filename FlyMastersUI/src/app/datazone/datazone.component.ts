@@ -72,7 +72,7 @@ export class DatazoneComponent implements OnInit {
     this.isLoading = true;
 
     this.quoteService
-      .GetPrifiles()
+      .GetPrifiles(this.authenticationService.credentials)
       .pipe(
         finalize(() => {
           this.isLoading = false;
