@@ -34,6 +34,22 @@ namespace FlyMasters.API.Controllers
             return users;
         }
 
+        [Route("Api/getsource")]
+        public IEnumerable<SourceListModel> GetSourceList()
+        {
+            _db = new FLYMASTERSContext();
+
+            var sourceList = (from p in _db.tblSources
+                         where p.IsActive == true
+                         select p).Select(x => new SourceListModel
+                         {
+                             SourceId = x.SourceId,
+                             SourceName = x.SourceName
+                         }).ToList();
+
+            return sourceList;
+        }
+
         [Route("Api/UserLogin")]
         [HttpGet]
         public LoginModel Login()

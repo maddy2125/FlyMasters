@@ -53,6 +53,7 @@ export class DatazoneComponent implements OnInit {
   rowData: any[];
   rowNotesData: any[];
   associates: any[];
+  sources: any[];
 
   columnNotesDefs = [
     { headerName: 'Added On', field: 'AddedOn', sortable: true, filter: true },
@@ -92,6 +93,18 @@ export class DatazoneComponent implements OnInit {
       .subscribe((quote: any[]) => {
         console.log(quote);
         this.associates = quote;
+      });
+
+    this.quoteService
+      .GetSource()
+      .pipe(
+        finalize(() => {
+          this.isLoading = false;
+        })
+      )
+      .subscribe((quote: any[]) => {
+        console.log(quote);
+        this.sources = quote;
       });
   }
 

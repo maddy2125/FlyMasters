@@ -4,6 +4,7 @@ import { Observable, of } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
 import { Profile } from '../Models/profile';
 import { User } from '../Models/user';
+import { Source } from '../Models/source';
 
 const routes = {
   quote: (c: RandomQuoteContext) => `/jokes/random?category=${c.category}`
@@ -46,5 +47,11 @@ export class DataZoneService {
     const url = 'http://localhost:29224/api/getusers';
 
     return this.httpClient.get<User[]>(url);
+  }
+
+  public GetSource(): Observable<Source[]> {
+    const url = 'http://localhost:29224/api/getsource';
+
+    return this.httpClient.get<Source[]>(url);
   }
 }
