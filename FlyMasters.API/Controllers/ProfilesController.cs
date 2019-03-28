@@ -17,10 +17,10 @@ namespace FlyMasters.API.Controllers
         private FLYMASTERSContext _db;
 
         // GET: api/Profiles
-        public IEnumerable<DataZoneViewModel> Get(string userId, bool isAdmin)
+        public IEnumerable<DataZoneViewModel> Get(string userId, string isAdmin)
         {
             _db = new FLYMASTERSContext();
-            if (isAdmin)
+            if (isAdmin.ToLower() == "yes")
             {
                 var profiles = (from p in _db.tblProfiles
                                 select p).Select(x => new DataZoneViewModel
@@ -101,7 +101,6 @@ namespace FlyMasters.API.Controllers
 
         // POST: api/Profiles
         [HttpPost]
-
         public HttpStatusCode Post(ProfileEditModel editModel)
         {
             try
@@ -172,6 +171,52 @@ namespace FlyMasters.API.Controllers
                 }
                 return HttpStatusCode.BadRequest;
 
+            }
+            catch (Exception ex)
+            {
+                return HttpStatusCode.InternalServerError;
+            }
+        }
+
+        [HttpPost]
+        [Route("Api/AssignProfiles")]
+        public HttpStatusCode AssignProfiles(ProfileMappedModel profileMappedModel)
+        {
+            try
+            {
+                _db = new FLYMASTERSContext();
+                // TODO: Add update logic here
+                tblLead leadInfo;
+                string comments = string.Empty;
+
+                foreach (var item in profileMappedModel.SelectedProfileIds)
+                {
+                    leadInfo = new tblLead();
+                    leadInfo.IsActive = true;
+                    leadInfo.MappedUserID = profileMappedModel.MappedUserId;
+                    leadInfo.CreatedBy = profileMappedModel.UserId;
+                    leadInfo.ProfileID = Convert.ToInt32(item);
+
+                    _db.tblLeads.Add(leadInfo);
+                    _db.SaveChanges();
+                    comments = "User has been assigned.";
+                    tblProfileNote notes;
+
+                    if (!string.IsNullOrEmpty(comments))
+                    {
+                        notes = new tblProfileNote();
+                        notes.ProfileId = leadInfo.ProfileID;
+                        notes.Description = comments;
+                        notes.AddedOn = DateTime.Now;
+                        notes.AddedBy = profileMappedModel.UserId;
+
+                        _db.tblProfileNotes.Add(notes);
+                        _db.SaveChanges();
+                        
+                    }
+                }
+
+                return HttpStatusCode.OK;
             }
             catch (Exception ex)
             {

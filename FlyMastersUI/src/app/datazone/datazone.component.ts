@@ -7,6 +7,8 @@ import { CustomCellComponent } from '../custom-cell/custom-cell.component';
 import { Location, LocationStrategy, PathLocationStrategy } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
 import { AuthenticationService } from '@app/core';
+import { stringLiteral } from 'babel-types';
+import { MappedProfiles } from '../Models/mappedprofile';
 
 @Component({
   selector: 'app-datazone',
@@ -18,17 +20,21 @@ export class DatazoneComponent implements OnInit {
   isLoading: boolean;
   isEdit: boolean;
   leadData: Profile;
+  mappedProfiles: MappedProfiles;
   selectedUser: number;
   selectedFiles: FileList;
   currentFileUpload: File;
   isAdmin: boolean;
+  selectedLevel: number;
 
   constructor(
     private route: ActivatedRoute,
     private location: Location,
     private quoteService: DataZoneService,
     private authenticationService: AuthenticationService
-  ) {}
+  ) {
+    this.mappedProfiles = new MappedProfiles();
+  }
 
   columnDefs = [
     { headerName: 'ProfileID', field: 'ProfileID', width: 120, headerCheckboxSelection: true, checkboxSelection: true },
@@ -65,6 +71,7 @@ export class DatazoneComponent implements OnInit {
     console.log(this.route.snapshot.queryParams['id']);
     this.isEdit = this.route.snapshot.queryParams['id'] != undefined ? true : false;
     this.isAdmin = this.authenticationService.credentials.IsAdmin;
+    this.selectedLevel = 0;
     //console.log(this.isAdmin);
     if (this.isEdit) {
       this.loadProfile();
@@ -73,7 +80,7 @@ export class DatazoneComponent implements OnInit {
     this.isLoading = true;
 
     this.quoteService
-      .GetPrifiles(this.authenticationService.credentials)
+      .GetProfiles()
       .pipe(
         finalize(() => {
           this.isLoading = false;
@@ -110,7 +117,7 @@ export class DatazoneComponent implements OnInit {
 
   loadProfile() {
     this.quoteService
-      .GetPrifileById(this.route.snapshot.queryParams['id'])
+      .GetProfileById(this.route.snapshot.queryParams['id'])
       .pipe(
         finalize(() => {
           this.isLoading = false;
@@ -155,16 +162,40 @@ export class DatazoneComponent implements OnInit {
     var currentRowIndex = param.rowIndex;
   }
   assign() {
-    console.log(this.quote);
+    if (this.quote.length > 0) {
+      var selectedProfiles = [];
+      for (let i = 0; i < this.quote.length; i++) {
+        selectedProfiles.push(this.quote[i].ProfileID);
+      }
+      console.log(selectedProfiles);
+      console.log(this.selectedLevel);
+      console.log(this.mappedProfiles);
+      //MappedProfiles a =new MappedProfiles();
+
+      this.mappedProfiles.mappedUserID = this.selectedLevel;
+      this.mappedProfiles.selectedProfileIds = selectedProfiles;
+      this.mappedProfiles.userID = this.authenticationService.credentials.UserId;
+
+      this.quoteService
+        .AssignProfile(this.mappedProfiles)
+        .pipe(
+          finalize(() => {
+            this.isLoading = false;
+          })
+        )
+        .subscribe(
+          res => {
+            console.log(res);
+            location.href = '/datazone';
+          },
+          err => {
+            console.log('Error occured');
+          }
+        );
+    }
   }
   onRowSelected(event: any) {
     this.quote = event.api.getSelectedRows();
-    //console.log(this.quote);
-    // if(event.node.isSelected()){
-    //   console.log("selected");
-    // } else {
-    //   console.log("unselected");
-    // }
   }
   selectFile(event: any) {
     this.selectedFiles = event.target.files;
