@@ -5,7 +5,7 @@
         <div ngbDropdown>
           <button class="btn btn-outline-primary" id="dropdownConfig" ngbDropdownToggle>
             <div ngbDropdownMenu class="dropdown show" aria-labelledby="language-dropdown">
-              <select (change)="filterForeCasts($event.target.value)">
+              <select [(ngModel)]="selectedSource" (change)="filterForeCasts($event.target.value)">
                 <option value="0">--Select Source--</option>
                 <option *ngFor="let source of sources" value="{{ source.SourceId }}">
                   {{ source.SourceName }}

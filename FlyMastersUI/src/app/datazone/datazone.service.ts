@@ -61,4 +61,16 @@ export class DataZoneService {
 
     return this.httpClient.post(url, model);
   }
+
+  public UploadProfiles(model: any[], source: any) {
+    const url = 'http://localhost:29224/api/UploadProfiles';
+    console.log(model.length);
+    let Params = new HttpParams();
+
+    // Begin assigning parameters
+    Params = Params.append('userId', this.authenticationService.credentials.UserId.toString());
+    Params = Params.append('sourceId', source);
+    console.log(Params);
+    return this.httpClient.post(url, model, { params: Params });
+  }
 }

@@ -9,6 +9,8 @@ import { ActivatedRoute } from '@angular/router';
 import { AuthenticationService } from '@app/core';
 import { stringLiteral } from 'babel-types';
 import { MappedProfiles } from '../Models/mappedprofile';
+import { ProfileImport } from '../Models/profileimport';
+import { async } from '@angular/core/testing';
 
 @Component({
   selector: 'app-datazone',
@@ -21,11 +23,14 @@ export class DatazoneComponent implements OnInit {
   isEdit: boolean;
   leadData: Profile;
   mappedProfiles: MappedProfiles;
+  importProfile: ProfileImport;
+  importProfileList: ProfileImport[] = [];
   selectedUser: number;
   selectedFiles: FileList;
   currentFileUpload: File;
   isAdmin: boolean;
   selectedLevel: number;
+  selectedSource: number;
 
   constructor(
     private route: ActivatedRoute,
@@ -34,6 +39,7 @@ export class DatazoneComponent implements OnInit {
     private authenticationService: AuthenticationService
   ) {
     this.mappedProfiles = new MappedProfiles();
+    this.importProfile = new ProfileImport();
   }
 
   columnDefs = [
@@ -72,6 +78,7 @@ export class DatazoneComponent implements OnInit {
     this.isEdit = this.route.snapshot.queryParams['id'] != undefined ? true : false;
     this.isAdmin = this.authenticationService.credentials.IsAdmin;
     this.selectedLevel = 0;
+    this.selectedSource = 0;
     //console.log(this.isAdmin);
     if (this.isEdit) {
       this.loadProfile();
@@ -201,6 +208,51 @@ export class DatazoneComponent implements OnInit {
     this.selectedFiles = event.target.files;
     console.log(this.selectedFiles);
   }
+
+  async csvJSON(csvText: any) {
+    console.log('excel reading started.');
+    var lines = csvText.split('\n');
+
+    var result = [];
+
+    var headers = lines[0].split(',');
+    //console.log(headers);
+    //console.log(lines);
+    for (var i = 1; i < lines.length; i++) {
+      var obj = {};
+      var currentline = lines[i].split(',');
+
+      for (var j = 0; j < headers.length; j++) {
+        obj[headers[j]] = currentline[j];
+        this.importProfile.FirstName = currentline[1] == undefined ? '' : currentline[1];
+        this.importProfile.LastName = currentline[2] == undefined ? '' : currentline[2];
+        this.importProfile.Phone = currentline[3] == undefined ? '' : currentline[3];
+        this.importProfile.Email = currentline[4] == undefined ? '' : currentline[4];
+      }
+      this.importProfileList.push(this.importProfile);
+      this.importProfile = new ProfileImport();
+      result.push(obj);
+    }
+    this.quoteService
+      .UploadProfiles(this.importProfileList, this.selectedSource)
+      .pipe(
+        finalize(() => {
+          this.isLoading = false;
+        })
+      )
+      .subscribe(
+        res => {
+          console.log(res);
+          location.href = '/datazone';
+        },
+        err => {
+          console.log('Error occured');
+        }
+      );
+
+    console.log(this.importProfileList.length);
+  }
+
   upload() {
     this.currentFileUpload = this.selectedFiles.item(0);
     //console.log(this.currentFileUpload);
@@ -209,34 +261,9 @@ export class DatazoneComponent implements OnInit {
     reader.onload = () => {
       let text = reader.result;
       this.csvJSON(text);
-      console.log(text);
     };
     reader.readAsText(this.currentFileUpload);
     this.selectedFiles = null;
-    // this.uploadService.pushFileToStorage(this.currentFileUpload).subscribe(event => {
-    //  if (event instanceof HttpResponse) {
-    //     console.log('File is completely uploaded!');
-    //   }
-    //});
     this.selectedFiles = undefined;
-  }
-  csvJSON(csvText: any) {
-    var lines = csvText.split('\n');
-
-    var result = [];
-
-    var headers = lines[0].split(',');
-    console.log(headers);
-    for (var i = 1; i < lines.length - 1; i++) {
-      var obj = {};
-      var currentline = lines[i].split(',');
-
-      for (var j = 0; j < headers.length; j++) {
-        obj[headers[j]] = currentline[j];
-      }
-
-      result.push(obj);
-    }
-    console.log(result);
   }
 }

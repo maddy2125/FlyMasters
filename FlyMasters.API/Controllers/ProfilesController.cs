@@ -224,6 +224,55 @@ namespace FlyMasters.API.Controllers
             }
         }
 
+        [HttpPost]
+        [Route("Api/UploadProfiles")]
+        public HttpStatusCode UploadProfiles(IEnumerable<ProfileImportModel> profileImportsModel, string userId, string sourceId) {
+
+            try
+            {
+                _db = new FLYMASTERSContext();
+
+                var user = Convert.ToInt32(userId.ToString());
+
+                if (profileImportsModel.Count() > 0)
+                {
+                    tblImport imp = new tblImport();
+                    imp.CreatedBy = user;
+                    imp.SourceID = Convert.ToInt32(sourceId.ToString());
+                    imp.ImportedOn = DateTime.Now;
+                    _db.tblImports.Add(imp);
+                    _db.SaveChanges();
+
+                    tblProfile profile;
+
+                    foreach (var model in profileImportsModel)
+                    {
+                        profile = new tblProfile();
+
+                        profile.CreateDate = DateTime.Now;
+                        profile.CreatedBy = user;
+                        profile.FirstName = model.FirstName.Trim();
+                        profile.ImportID = imp.ImportID;
+                        profile.LastName = model.LastName.Trim();
+                        profile.Phone = model.Phone.Trim();
+                        profile.Status = 1;
+                        profile.Email = model.Email.Trim();
+
+                        _db.tblProfiles.Add(profile);
+                        _db.SaveChanges();
+                    }
+                }
+                else
+                    return HttpStatusCode.BadRequest;
+
+                return HttpStatusCode.Created;
+            }
+            catch (Exception)
+            {
+                return HttpStatusCode.InternalServerError;
+            }
+        }
+
         // PUT: api/Profiles/5
         public void Put(int id, [FromBody]string value)
         {
