@@ -31,6 +31,7 @@ export class DatazoneComponent implements OnInit {
   isAdmin: boolean;
   selectedLevel: number;
   selectedSource: number;
+  selectedAdminUser: number;
 
   constructor(
     private route: ActivatedRoute,
@@ -79,13 +80,25 @@ export class DatazoneComponent implements OnInit {
     this.isAdmin = this.authenticationService.credentials.IsAdmin;
     this.selectedLevel = 0;
     this.selectedSource = 0;
+    this.selectedAdminUser = 0;
     //console.log(this.isAdmin);
     if (this.isEdit) {
       this.loadProfile();
+      this.quoteService
+        .GetUsers(0)
+        .pipe(
+          finalize(() => {
+            this.isLoading = false;
+          })
+        )
+        .subscribe((quote: any[]) => {
+          //console.log(quote);
+          this.associates = quote;
+        });
     }
     console.log(this.isEdit);
     this.isLoading = true;
-
+    this.selectedAdminUser = 0;
     this.quoteService
       .GetProfiles()
       .pipe(
@@ -98,7 +111,7 @@ export class DatazoneComponent implements OnInit {
       });
 
     this.quoteService
-      .GetUsers()
+      .GetUsers('-1')
       .pipe(
         finalize(() => {
           this.isLoading = false;
@@ -133,6 +146,7 @@ export class DatazoneComponent implements OnInit {
       .subscribe((quote: any) => {
         this.leadData = quote;
         this.rowNotesData = quote.profileNotesViewModel;
+        //console.log(quote);
         //console.log('Is Authenticated: '+this.authenticationService.isAuthenticated());
         //console.log('Login: '+this.authenticationService.credentials.UserId);
       });
@@ -265,5 +279,25 @@ export class DatazoneComponent implements OnInit {
     reader.readAsText(this.currentFileUpload);
     this.selectedFiles = null;
     this.selectedFiles = undefined;
+  }
+
+  InComplete() {
+    console.log(this.leadData);
+    this.quoteService
+      .InCompProfile(this.leadData.ProfileID)
+      .pipe(
+        finalize(() => {
+          this.isLoading = false;
+        })
+      )
+      .subscribe(
+        res => {
+          console.log(res);
+          location.href = '/datazone';
+        },
+        err => {
+          console.log('Error occured');
+        }
+      );
   }
 }

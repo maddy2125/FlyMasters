@@ -130,6 +130,25 @@
               <input type="text" class="form-control" id="inputEmail" [(ngModel)]="leadData.Email" name="email" />
             </div>
           </div>
+
+          <div class="form-row" *ngIf="leadData.StatusID == 3">
+            <div class="form-group col-md-6">
+              <label for="inputEmail"><b>Assign To</b></label>
+              <div ngbDropdown>
+                <button class="btn btn-outline-primary" id="dropdownConfig" ngbDropdownToggle>
+                  <div ngbDropdownMenu class="dropdown show" aria-labelledby="language-dropdown">
+                    <select [(ngModel)]="selectedAdminUser" (change)="filterForeCasts($event.target.value)">
+                      <option value="0">--Select Assign To--</option>
+                      <option *ngFor="let associate of associates" value="{{ associate.UserId }}">
+                        {{ associate.UserName }}
+                      </option>
+                    </select>
+                  </div>
+                </button>
+              </div>
+            </div>
+          </div>
+
           <div class="form-row">
             <div class="form-group col-md-6">
               <label for="inputNotes"><b>Notes</b></label>
@@ -159,7 +178,7 @@
   </div>
   <div class="modal-footer  d-flex justify-content-center">
     <button type="submit" (click)="save()" class="btn btn-primary">Save</button>
-    <button type="button" *ngIf="isEdit" class="btn btn-outline-dark" (click)="back()">InComplete Details</button>
+    <button type="button" *ngIf="isEdit" class="btn btn-outline-dark" (click)="InComplete()">InComplete Details</button>
     <button type="button" class="btn btn-outline-dark" (click)="back()">Back</button>
   </div>
 </div>

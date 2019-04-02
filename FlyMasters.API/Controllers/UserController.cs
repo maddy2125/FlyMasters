@@ -17,21 +17,47 @@ namespace FlyMasters.API.Controllers
         private FLYMASTERSContext _db;
 
         [Route("Api/getusers")]
-        public IEnumerable<UsersListModel> GetUsers()
+        public IEnumerable<UsersListModel> GetUsers(string allUsers = "-1")
         {
             _db = new FLYMASTERSContext();
 
-            var users = (from p in _db.tblUsers
-                         where p.IsActive == true
-                         select p).Select(x => new UsersListModel
-                         {
-                             UserId = x.UserID,
-                             FirstName = x.FirstName + " " + x.LastName
-                             ,LastName = x.FirstName + " " + x.LastName
-                             ,UserName = x.UserName
-                         }).ToList();
+            if (allUsers == "-1")
+            {
+                var users = (from p in _db.tblUsers
+                             where p.IsActive == true
+                             select p).Select(x => new UsersListModel
+                             {
+                                 UserId = x.UserID,
+                                 FirstName = x.FirstName + " " + x.LastName
+                                 ,
+                                 LastName = x.FirstName + " " + x.LastName
+                                 ,
+                                 UserName = x.UserName
+                             }).ToList();
 
-            return users;
+                return users;
+            }
+            else
+            {
+                var users = (from u in _db.tblUsers
+                             from up in _db.tblUserPrivileges
+                             from p in _db.tblPrivileges
+                             where up.UserID == u.UserID
+                             && up.PrivilegeID == p.PrivilegeID
+                             && p.PrivilegeName == "Admin"
+                             && u.IsActive == true
+                             select u).Select(x => new UsersListModel
+                             {
+                                 UserId = x.UserID,
+                                 FirstName = x.FirstName + " " + x.LastName
+                                 ,
+                                 LastName = x.FirstName + " " + x.LastName
+                                 ,
+                                 UserName = x.UserName
+                             }).ToList();
+
+                return users;
+            }
         }
 
         [Route("Api/getsource")]
@@ -40,12 +66,12 @@ namespace FlyMasters.API.Controllers
             _db = new FLYMASTERSContext();
 
             var sourceList = (from p in _db.tblSources
-                         where p.IsActive == true
-                         select p).Select(x => new SourceListModel
-                         {
-                             SourceId = x.SourceId,
-                             SourceName = x.SourceName
-                         }).ToList();
+                              where p.IsActive == true
+                              select p).Select(x => new SourceListModel
+                              {
+                                  SourceId = x.SourceId,
+                                  SourceName = x.SourceName
+                              }).ToList();
 
             return sourceList;
         }
@@ -82,7 +108,7 @@ namespace FlyMasters.API.Controllers
                         {
                             Lg.Status = "Success"; Lg.Message = string.Empty; Lg.UserId = obj.UserID;
 
-                           int adminPrivId = _db.tblPrivileges.Where(x => x.PrivilegeName == "Admin").FirstOrDefault().PrivilegeID;
+                            int adminPrivId = _db.tblPrivileges.Where(x => x.PrivilegeName == "Admin").FirstOrDefault().PrivilegeID;
 
                             if (obj.tblUserPrivileges.Where(x => x.PrivilegeID == adminPrivId).Count() > 0)
                                 Lg.IsAdmin = true;

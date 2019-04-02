@@ -44,10 +44,14 @@ export class DataZoneService {
     return this.httpClient.post(url, model);
   }
 
-  public GetUsers(): Observable<User[]> {
+  public GetUsers(allUsers: any): Observable<User[]> {
     const url = 'http://localhost:29224/api/getusers';
+    let Params = new HttpParams();
 
-    return this.httpClient.get<User[]>(url);
+    // Begin assigning parameters
+    Params = Params.append('allUsers', allUsers);
+
+    return this.httpClient.get<User[]>(url, { params: Params });
   }
 
   public GetSource(): Observable<Source[]> {
@@ -72,5 +76,18 @@ export class DataZoneService {
     Params = Params.append('sourceId', source);
     console.log(Params);
     return this.httpClient.post(url, model, { params: Params });
+  }
+
+  public InCompProfile(profileId: any) {
+    const url = 'http://localhost:29224/api/InCompProfiles';
+
+    let Params = new HttpParams();
+
+    // Begin assigning parameters
+    Params = Params.append('userId', this.authenticationService.credentials.UserId.toString());
+    Params = Params.append('profileId', profileId);
+
+    console.log(Params);
+    return this.httpClient.post(url, { params: Params });
   }
 }
