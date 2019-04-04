@@ -28,5 +28,9 @@ namespace FlyMasters.API.ViewModels
         public string Notes { get; set; }
 
         public IList<ProfileNotesViewModel> profileNotesViewModel { get; set; }
+
+        public int AssignedTo { get; set; }
+
+        public int ModifyBy { get; set; }
     }
 }

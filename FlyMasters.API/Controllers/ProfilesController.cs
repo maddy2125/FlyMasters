@@ -23,6 +23,7 @@ namespace FlyMasters.API.Controllers
             if (isAdmin.ToLower() == "yes")
             {
                 var profiles = (from p in _db.tblProfiles
+                                where p.Status <= 3
                                 select p).Select(x => new DataZoneViewModel
                                 {
                                     CreateDate = x.CreateDate.Value,
@@ -39,13 +40,15 @@ namespace FlyMasters.API.Controllers
 
                 return profiles;
             }
-            else {
+            else
+            {
                 var UID = int.Parse(userId);
                 var profiles = (from p in _db.tblProfiles
                                 from l in _db.tblLeads
                                 where l.ProfileID == p.ProfileID
                                 && l.MappedUserID == UID
                                && l.IsActive == true
+                                && p.Status <= 3
                                 select p).Select(x => new DataZoneViewModel
                                 {
                                     CreateDate = x.CreateDate.Value,
@@ -116,25 +119,40 @@ namespace FlyMasters.API.Controllers
                     profile.FirstName = editModel.FirstName;
                     profile.LastName = editModel.LastName;
                     profile.Phone = editModel.Phone;
-                    profile.Status = 3;
+                    if (profile.Status == 3 && editModel.AssignedTo != 0)
+                        profile.Status = 4;
+                    else
+                        profile.Status = 3;
                     profile.UpdateDate = DateTime.Now;
+                    
 
                     _db.Entry(profile).State = EntityState.Modified;
                     _db.SaveChanges();
 
-                    tblProfileNote notes;
-
                     if (!string.IsNullOrEmpty(editModel.Notes))
-                    {
-                        notes = new tblProfileNote();
-                        notes.ProfileId = editModel.ProfileID;
-                        notes.Description = editModel.Notes;
-                        notes.AddedOn = DateTime.Now;
-                        notes.AddedBy = 1;
+                        InsertComment(editModel.ProfileID, editModel.Notes, editModel.ModifyBy);
 
-                        _db.tblProfileNotes.Add(notes);
+                    //Assign Lead
+                    if (profile.Status == 4 && editModel.AssignedTo != 0)
+                    {
+                       tblLead presentLead = _db.tblLeads.Where(x => x.ProfileID == profile.ProfileID && x.IsActive == true).FirstOrDefault();
+                        if (presentLead != null)
+                        {
+                            presentLead.IsActive = false;
+                            _db.Entry(presentLead).State = EntityState.Modified;
+                            _db.SaveChanges();
+                        }
+                        presentLead = new tblLead();
+                        presentLead.ProfileID = profile.ProfileID;
+                        presentLead.MappedUserID = editModel.AssignedTo;
+                        presentLead.IsActive = true;
+                        presentLead.CreateDate = DateTime.Now;
+                        presentLead.CreatedBy = editModel.ModifyBy;
+
+                        _db.tblLeads.Add(presentLead);
                         _db.SaveChanges();
-                        return HttpStatusCode.OK;
+
+                        InsertComment(editModel.ProfileID, "Lead Created", editModel.ModifyBy);
                     }
                     return HttpStatusCode.OK;
                 }
@@ -145,7 +163,7 @@ namespace FlyMasters.API.Controllers
             }
 
             return HttpStatusCode.BadRequest;
-        }
+        }        
 
         [HttpPost]
         public HttpStatusCode SaveComments(int userId, int profileId, string comments)
@@ -212,7 +230,7 @@ namespace FlyMasters.API.Controllers
 
                         _db.tblProfileNotes.Add(notes);
                         _db.SaveChanges();
-                        
+
                     }
                 }
 
@@ -226,7 +244,8 @@ namespace FlyMasters.API.Controllers
 
         [HttpPost]
         [Route("Api/UploadProfiles")]
-        public HttpStatusCode UploadProfiles(IEnumerable<ProfileImportModel> profileImportsModel, string userId, string sourceId) {
+        public HttpStatusCode UploadProfiles(IEnumerable<ProfileImportModel> profileImportsModel, string userId, string sourceId)
+        {
 
             try
             {
@@ -282,6 +301,19 @@ namespace FlyMasters.API.Controllers
         public void Delete(int id)
         {
             //
+        }
+
+        private void InsertComment(int profileId, string comments, int addedBy)
+        {
+            tblProfileNote notes = new tblProfileNote();
+            notes.ProfileId = profileId;
+            notes.Description = comments;
+            notes.AddedOn = DateTime.Now;
+            notes.AddedBy = addedBy;
+
+            _db.tblProfileNotes.Add(notes);
+            _db.SaveChanges();
+
         }
     }
 }

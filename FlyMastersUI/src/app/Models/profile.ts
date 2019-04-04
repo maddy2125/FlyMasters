@@ -10,4 +10,8 @@ export interface Profile {
   Email: string;
 
   Status: string;
+
+  AssignedTo: number;
+
+  ModifyBy: number;
 }

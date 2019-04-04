@@ -153,6 +153,8 @@ export class DatazoneComponent implements OnInit {
   }
 
   save() {
+    this.leadData.ModifyBy = this.authenticationService.credentials.UserId;
+    this.leadData.AssignedTo = this.selectedAdminUser;
     console.log(this.leadData);
     this.quoteService
       .UpdatePrifile(this.leadData)
