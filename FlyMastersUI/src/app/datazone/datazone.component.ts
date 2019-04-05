@@ -146,9 +146,6 @@ export class DatazoneComponent implements OnInit {
       .subscribe((quote: any) => {
         this.leadData = quote;
         this.rowNotesData = quote.profileNotesViewModel;
-        //console.log(quote);
-        //console.log('Is Authenticated: '+this.authenticationService.isAuthenticated());
-        //console.log('Login: '+this.authenticationService.credentials.UserId);
       });
   }
 
@@ -157,7 +154,7 @@ export class DatazoneComponent implements OnInit {
     this.leadData.AssignedTo = this.selectedAdminUser;
     console.log(this.leadData);
     this.quoteService
-      .UpdatePrifile(this.leadData)
+      .UpdateProfile(this.leadData)
       .pipe(
         finalize(() => {
           this.isLoading = false;
@@ -283,10 +280,33 @@ export class DatazoneComponent implements OnInit {
     this.selectedFiles = undefined;
   }
 
-  InComplete() {
+  SaveComments() {
+    this.leadData.ModifyBy = this.authenticationService.credentials.UserId;
     console.log(this.leadData);
     this.quoteService
-      .InCompProfile(this.leadData.ProfileID)
+      .SaveNotes(this.leadData)
+      .pipe(
+        finalize(() => {
+          this.isLoading = false;
+        })
+      )
+      .subscribe(
+        res => {
+          console.log(res);
+          //location.href = '/datazone';
+          this.loadProfile();
+        },
+        err => {
+          console.log('Error occured');
+        }
+      );
+  }
+
+  InComplete() {
+    this.leadData.ModifyBy = this.authenticationService.credentials.UserId;
+    console.log(this.leadData);
+    this.quoteService
+      .InCompProfile(this.leadData)
       .pipe(
         finalize(() => {
           this.isLoading = false;

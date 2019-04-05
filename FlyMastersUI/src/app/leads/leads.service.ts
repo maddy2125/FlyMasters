@@ -32,11 +32,11 @@ export class LeadsZoneService {
     return this.httpClient.get<Profile[]>(url, { params: Params });
   }
 
-  //   public GetProfileById(id: any): Observable<Profile> {
-  //     const url = 'http://localhost:29224/api/profiles/' + id;
+  public GetProfileById(id: any): Observable<Profile> {
+    const url = 'http://localhost:29224/api/profiles/' + id;
 
-  //     return this.httpClient.get<Profile>(url);
-  //   }
+    return this.httpClient.get<Profile>(url);
+  }
 
   //   public UpdatePrifile(model: any) {
   //     const url = 'http://localhost:29224/api/profiles/';

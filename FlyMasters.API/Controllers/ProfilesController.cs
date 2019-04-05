@@ -123,7 +123,7 @@ namespace FlyMasters.API.Controllers
                                     AddedOn = x.AddedOn.Value,
                                     AddedBy = x.tblUser.UserName
                                 }
-                               ).OrderBy(x => x.AddedOn);
+                               ).OrderByDescending(x => x.AddedOn);
 
                 editModel.profileNotesViewModel = comments.ToList();
             }
@@ -153,7 +153,7 @@ namespace FlyMasters.API.Controllers
                     else
                         profile.Status = 3;
                     profile.UpdateDate = DateTime.Now;
-                    
+
 
                     _db.Entry(profile).State = EntityState.Modified;
                     _db.SaveChanges();
@@ -164,7 +164,7 @@ namespace FlyMasters.API.Controllers
                     //Assign Lead
                     if (profile.Status == 4 && editModel.AssignedTo != 0)
                     {
-                       tblLead presentLead = _db.tblLeads.Where(x => x.ProfileID == profile.ProfileID && x.IsActive == true).FirstOrDefault();
+                        tblLead presentLead = _db.tblLeads.Where(x => x.ProfileID == profile.ProfileID && x.IsActive == true).FirstOrDefault();
                         if (presentLead != null)
                         {
                             presentLead.IsActive = false;
@@ -192,10 +192,11 @@ namespace FlyMasters.API.Controllers
             }
 
             return HttpStatusCode.BadRequest;
-        }        
+        }
 
         [HttpPost]
-        public HttpStatusCode SaveComments(int userId, int profileId, string comments)
+        [Route("Api/SaveComments")]
+        public HttpStatusCode SaveComments(ProfileEditModel editModel)
         {
             try
             {
@@ -204,13 +205,13 @@ namespace FlyMasters.API.Controllers
 
                 tblProfileNote notes;
 
-                if (!string.IsNullOrEmpty(comments))
+                if (!string.IsNullOrEmpty(editModel.Notes))
                 {
                     notes = new tblProfileNote();
-                    notes.ProfileId = profileId;
-                    notes.Description = comments;
+                    notes.ProfileId = editModel.ProfileID;
+                    notes.Description = editModel.Notes;
                     notes.AddedOn = DateTime.Now;
-                    notes.AddedBy = userId;
+                    notes.AddedBy = editModel.ModifyBy;
 
                     _db.tblProfileNotes.Add(notes);
                     _db.SaveChanges();
@@ -317,6 +318,33 @@ namespace FlyMasters.API.Controllers
             }
             catch (Exception)
             {
+                return HttpStatusCode.InternalServerError;
+            }
+        }
+
+        [HttpPost]
+        [Route("Api/ProfileIncomplete")]
+        public HttpStatusCode ProfileIncomplete(ProfileEditModel editModel)
+        {
+            try
+            {
+                _db = new FLYMASTERSContext();
+
+                var profile = _db.tblProfiles.Find(editModel.ProfileID);
+
+                if (profile != null)
+                {
+                    profile.Status = 2;
+                    profile.UpdateDate = DateTime.Now;
+                    
+                    _db.Entry(profile).State = EntityState.Modified;
+                    _db.SaveChanges();
+                }
+                return HttpStatusCode.Created;
+            }
+            catch (Exception)
+            {
+
                 return HttpStatusCode.InternalServerError;
             }
         }

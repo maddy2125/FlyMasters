@@ -15,6 +15,8 @@ import { AuthenticationService } from '@app/core';
 })
 export class LeadsComponent implements OnInit {
   isLoading: boolean;
+  leadData: Profile;
+  isEdit: boolean;
 
   constructor(
     private route: ActivatedRoute,
@@ -44,8 +46,20 @@ export class LeadsComponent implements OnInit {
   ];
 
   rowData: any[];
+  rowNotesData: any[];
+
+  columnNotesDefs = [
+    { headerName: 'Added On', field: 'AddedOn', sortable: true, filter: true },
+    { headerName: 'Added By', field: 'AddedBy', sortable: true, filter: true },
+    { headerName: 'Notes', field: 'Comments', sortable: true, filter: true }
+  ];
 
   ngOnInit() {
+    this.isEdit = this.route.snapshot.queryParams['id'] != undefined ? true : false;
+    if (this.isEdit) {
+      this.loadProfile();
+    }
+
     this.quoteService
       .loadLeadProfiles()
       .pipe(
@@ -56,5 +70,23 @@ export class LeadsComponent implements OnInit {
       .subscribe((quote: any[]) => {
         this.rowData = quote;
       });
+  }
+
+  loadProfile() {
+    this.quoteService
+      .GetProfileById(this.route.snapshot.queryParams['id'])
+      .pipe(
+        finalize(() => {
+          this.isLoading = false;
+        })
+      )
+      .subscribe((quote: any) => {
+        console.log(quote);
+        this.leadData = quote;
+        this.rowNotesData = quote.profileNotesViewModel;
+      });
+  }
+  back() {
+    location.href = '/leads';
   }
 }

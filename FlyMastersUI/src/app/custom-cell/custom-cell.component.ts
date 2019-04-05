@@ -105,6 +105,12 @@ export class CustomCellComponent implements OnInit {
 
     location.href = '/datazone?id=' + this.data;
   }
+  view() {
+    //this.loadProfile();
+    // this.modalService.open(NgbdModal1Content);
+
+    location.href = '/leads?id=' + this.data;
+  }
   loadProfile() {
     this.quoteService
       .GetPrifileById(this.data)
