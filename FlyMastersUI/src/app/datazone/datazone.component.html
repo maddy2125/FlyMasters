@@ -182,7 +182,9 @@
   </div>
   <div class="modal-footer  d-flex justify-content-center">
     <button type="submit" (click)="save()" class="btn btn-primary">Save</button>
-    <button type="button" *ngIf="isEdit" class="btn btn-outline-dark" (click)="InComplete()">InComplete Details</button>
+    <button type="button" *ngIf="isEdit && leadData.StatusID == 1" class="btn btn-outline-dark" (click)="InComplete()">
+      InComplete Details
+    </button>
     <button type="button" class="btn btn-outline-dark" (click)="back()">Back</button>
   </div>
 </div>

@@ -6,8 +6,10 @@ import { CoreModule } from '@app/core';
 import { SharedModule } from '@app/shared';
 import { LeadsRoutingModule } from './leads-routing.module';
 import { LeadsComponent } from './leads.component';
+import { LeadsZoneService } from './leads.service';
 import { AgGridModule } from 'ag-grid-angular';
 import { FormsModule } from '@angular/forms';
+//import { CellEditRenderingComponent } from '../datazone/celleditrenderingcomponent';
 
 @NgModule({
   imports: [
@@ -21,6 +23,6 @@ import { FormsModule } from '@angular/forms';
     FormsModule
   ],
   declarations: [LeadsComponent],
-  providers: []
+  providers: [LeadsZoneService]
 })
 export class LeadsModule {}

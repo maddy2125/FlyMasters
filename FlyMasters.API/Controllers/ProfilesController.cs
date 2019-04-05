@@ -67,6 +67,35 @@ namespace FlyMasters.API.Controllers
             }
         }
 
+        // GET: api/LeadProfiles
+        [Route("api/leadprofiles")]
+        public IEnumerable<DataZoneViewModel> GetLeads(string userId, string isAdmin)
+        {
+            _db = new FLYMASTERSContext();
+            if (isAdmin.ToLower() == "yes")
+            {
+                var profiles = (from p in _db.tblProfiles
+                                where p.Status >= 4
+                                select p).Select(x => new DataZoneViewModel
+                                {
+                                    CreateDate = x.CreateDate.Value,
+                                    Email = x.Email,
+                                    FirstName = x.FirstName,
+                                    LastName = x.LastName,
+                                    Phone = x.Phone,
+                                    ProfileID = x.ProfileID,
+                                    StatusID = x.Status.Value,
+                                    Status = x.tblStatus.StatusName,
+                                    Source = _db.tblSources.Where(t => t.SourceId == x.tblImport.SourceID).FirstOrDefault().SourceName,
+                                    AssignedTo = _db.tblLeads.Where(t => t.ProfileID == x.ProfileID && t.IsActive == true).FirstOrDefault().tblUser1.UserName
+                                }).OrderByDescending(x => x.CreateDate);
+
+                return profiles;
+            }
+            else
+                return null;
+        }
+
         // GET: api/Profiles/5
         public ProfileEditModel Get(int id)
         {

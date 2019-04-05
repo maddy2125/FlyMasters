@@ -1,6 +1,25 @@
-<div class="container-fluid">
+<!-- <div class="container-fluid">
   <div class="jumbotron text-center">
     <app-loader [isLoading]="isLoading"></app-loader>
     Leads page Under Construction......
+  </div>
+</div> -->
+<div class="container-fluid">
+  <app-loader [isLoading]="isLoading"></app-loader>
+  <div id="agGrid">
+    <ag-grid-angular
+      #dzgrid
+      style="width: 100%; height: 530px;"
+      class="ag-theme-balham"
+      [rowHeight]="35"
+      [rowData]="rowData"
+      [columnDefs]="columnDefs"
+      pagination="true"
+      rowSelection="multiple"
+      rowDeselection="true"
+      suppressRowClickSelection="true"
+      paginationPageSize="13"
+    >
+    </ag-grid-angular>
   </div>
 </div>
