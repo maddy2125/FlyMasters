@@ -32,6 +32,7 @@ export class DatazoneComponent implements OnInit {
   selectedLevel: number;
   selectedSource: number;
   selectedAdminUser: number;
+  saveButtonText: string = 'Save';
 
   constructor(
     private route: ActivatedRoute,
@@ -146,6 +147,7 @@ export class DatazoneComponent implements OnInit {
       .subscribe((quote: any) => {
         this.leadData = quote;
         this.rowNotesData = quote.profileNotesViewModel;
+        this.saveButtonText = quote.StatusID < 3 ? 'Validate Profile' : 'Create Lead';
       });
   }
 
