@@ -11,7 +11,7 @@ using System.Web.Http.Cors;
 
 namespace FlyMasters.API.Controllers
 {
-    [EnableCors(origins: "http://localhost:4200", headers: "*", methods: "*")]
+    [EnableCors(origins: "http://lead.flymasters.in,http://localhost:4200", headers: "*", methods: "*")]
     public class ProfilesController : ApiController
     {
         private FLYMASTERSContext _db;
