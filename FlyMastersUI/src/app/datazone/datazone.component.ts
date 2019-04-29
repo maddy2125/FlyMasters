@@ -4,6 +4,7 @@ import { DataZoneService } from './datazone.service';
 import { Profile } from '../Models/profile';
 import { CellEditRenderingComponent } from '../home/celleditrenderingcomponent';
 import { CustomCellComponent } from '../custom-cell/custom-cell.component';
+import { AddviewNotesComponent } from '../custom-cell/addviewnotes-cell.component';
 import { Location, LocationStrategy, PathLocationStrategy } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
 import { AuthenticationService } from '@app/core';
@@ -11,13 +12,14 @@ import { stringLiteral } from 'babel-types';
 import { MappedProfiles } from '../Models/mappedprofile';
 import { ProfileImport } from '../Models/profileimport';
 import { async } from '@angular/core/testing';
-
+import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 @Component({
   selector: 'app-datazone',
   templateUrl: './datazone.component.html',
   styleUrls: ['./datazone.component.scss']
 })
 export class DatazoneComponent implements OnInit {
+  closeResult: string;
   quote: any[];
   isLoading: boolean;
   isEdit: boolean;
@@ -38,26 +40,47 @@ export class DatazoneComponent implements OnInit {
     private route: ActivatedRoute,
     private location: Location,
     private quoteService: DataZoneService,
-    private authenticationService: AuthenticationService
+    private authenticationService: AuthenticationService,
+    private modalService: NgbModal
   ) {
     this.mappedProfiles = new MappedProfiles();
     this.importProfile = new ProfileImport();
+  }
+  open(content: string) {
+    this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' }).result.then(
+      result => {
+        this.closeResult = `Closed with: ${result}`;
+      },
+      reason => {
+        this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+      }
+    );
+  }
+
+  private getDismissReason(reason: any): string {
+    if (reason === ModalDismissReasons.ESC) {
+      return 'by pressing ESC';
+    } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
+      return 'by clicking on a backdrop';
+    } else {
+      return `with: ${reason}`;
+    }
   }
 
   columnDefs = [
     { headerName: 'ProfileID', field: 'ProfileID', width: 120, headerCheckboxSelection: true, checkboxSelection: true },
     { headerName: 'First Name', field: 'FirstName', sortable: true, filter: true, width: 170 },
     { headerName: 'Last Name', field: 'LastName', sortable: true, filter: true, width: 150 },
-    { headerName: 'Phone', field: 'Phone', sortable: true, filter: true, width: 125 },
-    { headerName: 'Email', field: 'Email', sortable: true, filter: true, width: 230 },
-    { headerName: 'Source', field: 'Source', sortable: true, filter: true, width: 125 },
-    { headerName: 'Assigned To', field: 'AssignedTo', sortable: true, filter: true, width: 125 },
-    { headerName: 'Status', field: 'Status', sortable: true, filter: true, width: 170 },
+    { headerName: 'Phone', field: 'Phone', sortable: true, filter: true, width: 100 },
+    { headerName: 'Email', field: 'Email', sortable: true, filter: true, width: 200 },
+    { headerName: 'Source', field: 'Source', sortable: true, filter: true, width: 100 },
+    { headerName: 'Assigned To', field: 'AssignedTo', sortable: true, filter: true, width: 100 },
+    { headerName: 'Status', field: 'Status', sortable: true, filter: true, width: 150 },
     {
       headerName: '',
       field: 'ProfileID',
       cellRendererFramework: CustomCellComponent,
-      width: 100,
+      width: 250,
       cellRendererParams: {
         inRouterLink: '/createLead/'
       }
@@ -72,7 +95,7 @@ export class DatazoneComponent implements OnInit {
   columnNotesDefs = [
     { headerName: 'Added On', field: 'AddedOn', sortable: true, filter: true },
     { headerName: 'Added By', field: 'AddedBy', sortable: true, filter: true },
-    { headerName: 'Notes', field: 'Comments', sortable: true, filter: true }
+    { headerName: 'Notes', field: 'Comments', sortable: true, filter: true, tooltipField: 'Comments' }
   ];
 
   ngOnInit() {
@@ -83,21 +106,21 @@ export class DatazoneComponent implements OnInit {
     this.selectedSource = 0;
     this.selectedAdminUser = 0;
     //console.log(this.isAdmin);
-    if (this.isEdit) {
-      this.loadProfile();
-      this.quoteService
-        .GetUsers(0)
-        .pipe(
-          finalize(() => {
-            this.isLoading = false;
-          })
-        )
-        .subscribe((quote: any[]) => {
-          //console.log(quote);
-          this.associates = quote;
-        });
-    }
-    console.log(this.isEdit);
+    // if (this.isEdit) {
+    //   this.loadProfile();
+    //   this.quoteService
+    //     .GetUsers(0)
+    //     .pipe(
+    //       finalize(() => {
+    //         this.isLoading = false;
+    //       })
+    //     )
+    //     .subscribe((quote: any[]) => {
+    //       //console.log(quote);
+    //       this.associates = quote;
+    //     });
+    // }
+    //console.log(this.isEdit);
     this.isLoading = true;
     this.selectedAdminUser = 0;
     this.quoteService
