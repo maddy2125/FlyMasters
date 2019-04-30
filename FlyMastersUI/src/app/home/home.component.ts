@@ -55,7 +55,91 @@ export class HomeComponent implements OnInit {
   ngOnInit() {
     console.log(this.route.snapshot.queryParams['id']);
     this.isEdit = this.route.snapshot.queryParams['id'] != undefined ? true : false;
-
+    if (this.isEdit) {
+      this.loadProfile();
+    }
+    console.log(this.isEdit);
     this.isLoading = true;
+
+    this.quoteService
+      .GetPrifiles()
+      .pipe(
+        finalize(() => {
+          this.isLoading = false;
+        })
+      )
+      .subscribe((quote: any[]) => {
+        this.rowData = quote;
+      });
+
+    this.quoteService
+      .GetUsers()
+      .pipe(
+        finalize(() => {
+          this.isLoading = false;
+        })
+      )
+      .subscribe((quote: any[]) => {
+        console.log(quote);
+        this.associates = quote;
+      });
+  }
+
+  loadProfile() {
+    this.quoteService
+      .GetPrifileById(this.route.snapshot.queryParams['id'])
+      .pipe(
+        finalize(() => {
+          this.isLoading = false;
+        })
+      )
+      .subscribe((quote: any) => {
+        this.leadData = quote;
+        console.log(quote.profileNotesViewModel[0]);
+        this.rowNotesData = quote.profileNotesViewModel;
+      });
+  }
+
+  save() {
+    console.log(this.leadData);
+    this.quoteService
+      .UpdatePrifile(this.leadData)
+      .pipe(
+        finalize(() => {
+          this.isLoading = false;
+        })
+      )
+      .subscribe(
+        res => {
+          console.log(res);
+          location.href = '/home';
+        },
+        err => {
+          console.log('Error occured');
+        }
+      );
+  }
+  back() {
+    location.href = '/home';
+  }
+  filterForeCasts(filterVal: any) {
+    this.selectedUser = filterVal;
+    console.log(this.selectedUser);
+    //console.log(this.associates.filter((item) => item.summary == filterVal));
+  }
+  RowClick(param: any) {
+    var currentRowIndex = param.rowIndex;
+  }
+  assign() {
+    console.log(this.leadData);
+  }
+  onRowSelected(event: any) {
+    console.log(event);
+    if (event.node.isSelected()) {
+      console.log('selected');
+    } else {
+      event.node.setSelected(true);
+      console.log('unselected');
+    }
   }
 }

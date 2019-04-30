@@ -21,10 +21,8 @@ export class DataZoneService {
   constructor(private httpClient: HttpClient, private authenticationService: AuthenticationService) {}
 
   result: string[];
-  apiUrl: string = 'http://localhost:29224/api';
-
   public GetProfiles(): Observable<Profile[]> {
-    const url = this.apiUrl + '/profiles';
+    const url = 'http://localhost:29224/api/profiles';
     // Initialize Params Object
     let Params = new HttpParams();
 
@@ -35,25 +33,25 @@ export class DataZoneService {
   }
 
   public GetProfileById(id: any): Observable<Profile> {
-    const url = this.apiUrl + '/profiles/' + id;
+    const url = 'http://localhost:29224/api/profiles/' + id;
 
     return this.httpClient.get<Profile>(url);
   }
 
   public UpdateProfile(model: any) {
-    const url = this.apiUrl + '/profiles/';
+    const url = 'http://localhost:29224/api/profiles/';
 
     return this.httpClient.post(url, model);
   }
 
   public SaveNotes(model: any) {
-    const url = this.apiUrl + '/SaveComments';
+    const url = 'http://localhost:29224/api/SaveComments';
     console.log(model);
     return this.httpClient.post(url, model);
   }
 
   public GetUsers(allUsers: any): Observable<User[]> {
-    const url = this.apiUrl + '/getusers';
+    const url = 'http://localhost:29224/api/getusers';
     let Params = new HttpParams();
 
     // Begin assigning parameters
@@ -63,19 +61,19 @@ export class DataZoneService {
   }
 
   public GetSource(): Observable<Source[]> {
-    const url = this.apiUrl + '/getsource';
+    const url = 'http://localhost:29224/api/getsource';
 
     return this.httpClient.get<Source[]>(url);
   }
 
   public AssignProfile(model: any) {
-    const url = this.apiUrl + '/AssignProfiles';
+    const url = 'http://localhost:29224/api/AssignProfiles';
 
     return this.httpClient.post(url, model);
   }
 
   public UploadProfiles(model: any[], source: any) {
-    const url = this.apiUrl + '/UploadProfiles';
+    const url = 'http://localhost:29224/api/UploadProfiles';
     console.log(model.length);
     let Params = new HttpParams();
 
@@ -87,7 +85,7 @@ export class DataZoneService {
   }
 
   public InCompProfile(model: any) {
-    const url = this.apiUrl + '/ProfileIncomplete';
+    const url = 'http://localhost:29224/api/ProfileIncomplete';
 
     console.log(model);
     return this.httpClient.post(url, model);

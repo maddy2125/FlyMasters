@@ -83,6 +83,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{A9BBEA9B-83C
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "app", "app", "{1A8B07AA-5EF4-4863-A23B-5718607C40A1}"
 	ProjectSection(SolutionItems) = preProject
+		FlyMastersUI\src\app\app-routing.module.ts = FlyMastersUI\src\app\app-routing.module.ts
 		FlyMastersUI\src\app\app.component.html = FlyMastersUI\src\app\app.component.html
 		FlyMastersUI\src\app\app.component.scss = FlyMastersUI\src\app\app.component.scss
 		FlyMastersUI\src\app\app.component.spec.ts = FlyMastersUI\src\app\app.component.spec.ts
@@ -140,12 +141,14 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "custom-cell", "custom-cell"
 		FlyMastersUI\src\app\custom-cell\custom-cell.component.html = FlyMastersUI\src\app\custom-cell\custom-cell.component.html
 		FlyMastersUI\src\app\custom-cell\custom-cell.component.scss = FlyMastersUI\src\app\custom-cell\custom-cell.component.scss
 		FlyMastersUI\src\app\custom-cell\custom-cell.component.spec.ts = FlyMastersUI\src\app\custom-cell\custom-cell.component.spec.ts
+		FlyMastersUI\src\app\custom-cell\custom-cell.component.ts = FlyMastersUI\src\app\custom-cell\custom-cell.component.ts
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "datazone", "datazone", "{532B6659-C76B-44D3-A99A-BBAA77F0A362}"
 	ProjectSection(SolutionItems) = preProject
 		FlyMastersUI\src\app\datazone\celleditrenderingcomponent.ts = FlyMastersUI\src\app\datazone\celleditrenderingcomponent.ts
 		FlyMastersUI\src\app\datazone\datazone-routing.module.ts = FlyMastersUI\src\app\datazone\datazone-routing.module.ts
+		FlyMastersUI\src\app\datazone\datazone.component.html = FlyMastersUI\src\app\datazone\datazone.component.html
 		FlyMastersUI\src\app\datazone\datazone.component.scss = FlyMastersUI\src\app\datazone\datazone.component.scss
 		FlyMastersUI\src\app\datazone\datazone.component.spec.ts = FlyMastersUI\src\app\datazone\datazone.component.spec.ts
 		FlyMastersUI\src\app\datazone\datazone.component.ts = FlyMastersUI\src\app\datazone\datazone.component.ts

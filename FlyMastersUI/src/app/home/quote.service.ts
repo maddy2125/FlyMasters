@@ -19,7 +19,6 @@ export class QuoteService {
   constructor(private httpClient: HttpClient) {}
 
   result: string[];
-  apiUrl: string = 'http://localhost:29224/api';
 
   getRandomQuote(context: RandomQuoteContext): Observable<string> {
     return this.httpClient
@@ -32,25 +31,25 @@ export class QuoteService {
   }
 
   public GetPrifiles(): Observable<Profile[]> {
-    const url = this.apiUrl + '/profiles';
+    const url = 'http://localhost:29224/api/profiles';
 
     return this.httpClient.get<Profile[]>(url);
   }
 
   public GetPrifileById(id: any): Observable<Profile> {
-    const url = this.apiUrl + '/profiles/' + id;
+    const url = 'http://localhost:29224/api/profiles/' + id;
 
     return this.httpClient.get<Profile>(url);
   }
 
   public UpdatePrifile(model: any) {
-    const url = this.apiUrl + '/profiles/';
+    const url = 'http://localhost:29224/api/profiles/';
 
     return this.httpClient.post(url, model);
   }
 
   public GetUsers(): Observable<User[]> {
-    const url = this.apiUrl + '/getusers';
+    const url = 'http://localhost:29224/api/getusers';
 
     return this.httpClient.get<User[]>(url);
   }
