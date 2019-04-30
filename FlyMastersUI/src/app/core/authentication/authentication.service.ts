@@ -27,6 +27,7 @@ const credentialsKey = 'credentials';
 export class AuthenticationService {
   private _credentials: Credentials | null;
   private _creddata: Credentials | null;
+  apiUrl: string = 'http://localhost:29224/api';
 
   constructor(private httpClient: HttpClient) {
     const savedCredentials = sessionStorage.getItem(credentialsKey) || localStorage.getItem(credentialsKey);
@@ -41,7 +42,7 @@ export class AuthenticationService {
    * @return The user credentials.
    */
   login(context: LoginContext): Observable<Credentials> {
-    const url = 'http://localhost:29224/api/login';
+    const url = this.apiUrl + '/login';
     const headers = new HttpHeaders().set('content-type', 'application/json');
     var res = this.httpClient.post<Credentials>(url, context, { headers });
     return res;

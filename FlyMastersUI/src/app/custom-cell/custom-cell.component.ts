@@ -1,75 +1,11 @@
 import { Component, OnInit, ViewChild, Input } from '@angular/core';
 import { QuoteService } from '../home/quote.service';
+import { DataZoneService } from '../datazone/datazone.service';
 import { finalize } from 'rxjs/operators';
 import { Location, LocationStrategy, PathLocationStrategy } from '@angular/common';
-//import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Profile } from '@app/Models/profile';
-
-/*
-@Component({
-  template: `
-    <div class="modal-header">
-      <h4 class="modal-title">Profile Validate</h4>
-      <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
-        <span aria-hidden="true">&times;</span>
-      </button>
-    </div>
-    <div class="modal-body">
-    <form>
-    <div class="form-row">
-    <div class="form-group">
-    <label for="inputFirstName">First Name</label>
-      <input type="text" class="form-control" id="inputFirstName" [childMessage]="parentMessage"  name="fname" placeholder="First Name">
-      
-    </div>
-    </div>
-    <div class="form-row">
-    <div class="form-group">
-      <label for="inputLastName">Last Name</label>
-      <input type="text" class="form-control" id="inputLastName" placeholder="Last Name">
-    </div></div>
-    <div class="form-row">
-    <div class="form-group">
-      <label for="inputPhone">Phone</label>
-      <input type="text" class="form-control" id="inputPhone" placeholder="111 111-1111">
-    </div>
-    </div>
-    <div class="form-row">
-      <div class="form-group col-md-6">
-        <label for="inputEmail">Email</label>
-        <input type="text" class="form-control" id="inputEmail">
-      </div>
-    </div>
-    
-  </form>
-    </div>
-    <div class="modal-footer">
-    <button type="submit" (click)="save()" class="btn btn-primary">Save</button>
-      <button type="button" class="btn btn-outline-dark" (click)="activeModal.close('Close click')">Close</button>
-    </div>
-  `
-})
-export class NgbdModal1Content {
-  constructor(private modalService: NgbModal, public activeModal: NgbActiveModal,private location:Location) {}
-  
-  @Input() childMessage: any;
-
-  ngOnInit() {
-    
-    }
-  open() {
-    
-    this.modalService.open(NgbdModal1Content, {
-      size: 'lg'
-    });
-  }
-  save()
-    {
-      this.activeModal.close('Close click')
-      location.href='/lead';
-    }
-}
-*/
+import { AuthenticationService } from '@app/core';
 @Component({
   selector: 'app-customcell',
   templateUrl: './custom-cell.component.html',
@@ -80,37 +16,43 @@ export class CustomCellComponent implements OnInit {
   params: any;
   isLoading: boolean;
   leadData: Profile;
-  firstName1: string;
-  parentMessage: string;
-  @Input() childMessage: any;
+  associates: any[];
+  selectedAdminUser: number;
+  selectedUser: number;
+  saveButtonText: string = 'Save';
 
-  constructor(private location: Location, private quoteService: QuoteService) {}
+  constructor(
+    private location: Location,
+    private quoteService: QuoteService,
+    private datazoneService: DataZoneService,
+    private authenticationService: AuthenticationService,
+    private modalService: NgbModal
+  ) {}
   agInit(params: any): void {
     this.params = params;
-    //console.log(params.data.StatusID);
     this.data = params.value;
   }
   ngOnInit() {
-    this.firstName1 = 'madhu';
+    this.selectedAdminUser = 0;
   }
-  open() {
-    //this.loadProfile();
-    // this.modalService.open(NgbdModal1Content);
+  open(content: string) {
+    this.loadProfile();
+    this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' }).result.then(result => {}, reason => {});
+  }
+  lead(content: string) {
+    this.loadProfile();
+    this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' }).result.then(result => {}, reason => {});
+  }
 
-    location.href = '/datazone?id=' + this.data;
-  }
-  lead() {
+  OpenNotes(opennotes: string) {
     //this.loadProfile();
-    // this.modalService.open(NgbdModal1Content);
-
-    location.href = '/datazone?id=' + this.data;
+    this.modalService.open(opennotes, { ariaLabelledBy: 'modal-basic-title' }).result.then(result => {}, reason => {});
   }
+
   view() {
-    //this.loadProfile();
-    // this.modalService.open(NgbdModal1Content);
-
     location.href = '/leads?id=' + this.data;
   }
+
   loadProfile() {
     this.quoteService
       .GetPrifileById(this.data)
@@ -120,10 +62,69 @@ export class CustomCellComponent implements OnInit {
         })
       )
       .subscribe((quote: any) => {
-        //this.quote = quote;
         this.leadData = quote;
-        this.childMessage = this.leadData.FirstName;
+        this.datazoneService
+          .GetUsers(0)
+          .pipe(
+            finalize(() => {
+              this.isLoading = false;
+            })
+          )
+          .subscribe((quote: any[]) => {
+            this.associates = quote;
+          });
+        this.saveButtonText = quote.StatusID < 3 ? 'Validate Profile' : 'Create Lead';
         console.log(this.leadData);
       });
+  }
+
+  filterForeCasts(filterVal: any) {
+    this.selectedUser = filterVal;
+    console.log(this.selectedUser);
+  }
+
+  save() {
+    this.leadData.ModifyBy = this.authenticationService.credentials.UserId;
+    this.leadData.AssignedTo = this.selectedAdminUser;
+    console.log(this.leadData);
+    this.datazoneService
+      .UpdateProfile(this.leadData)
+      .pipe(
+        finalize(() => {
+          this.isLoading = false;
+        })
+      )
+      .subscribe(
+        res => {
+          console.log(res);
+          this.modalService.dismissAll();
+          location.href = '/datazone';
+        },
+        err => {
+          console.log('Error occured');
+        }
+      );
+  }
+
+  InComplete() {
+    this.leadData.ModifyBy = this.authenticationService.credentials.UserId;
+    console.log(this.leadData);
+    this.datazoneService
+      .InCompProfile(this.leadData)
+      .pipe(
+        finalize(() => {
+          this.isLoading = false;
+        })
+      )
+      .subscribe(
+        res => {
+          console.log(res);
+          this.modalService.dismissAll();
+          location.href = '/datazone';
+        },
+        err => {
+          console.log('Error occured');
+        }
+      );
   }
 }
