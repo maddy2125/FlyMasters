@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
 import { Profile } from '../Models/profile';
@@ -49,9 +49,19 @@ export class QuoteService {
     return this.httpClient.post(url, model);
   }
 
-  public GetUsers(): Observable<User[]> {
+  public GetUsers(allUsers: any): Observable<User[]> {
     const url = this.apiUrl + '/getusers';
+    let Params = new HttpParams();
 
-    return this.httpClient.get<User[]>(url);
+    // Begin assigning parameters
+    Params = Params.append('allUsers', allUsers);
+
+    return this.httpClient.get<User[]>(url, { params: Params });
+  }
+
+  public SaveNotes(model: any) {
+    const url = this.apiUrl + '/SaveComments';
+    console.log(model);
+    return this.httpClient.post(url, model);
   }
 }

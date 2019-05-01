@@ -4,7 +4,7 @@ import { DataZoneService } from './datazone.service';
 import { Profile } from '../Models/profile';
 import { CellEditRenderingComponent } from '../home/celleditrenderingcomponent';
 import { CustomCellComponent } from '../custom-cell/custom-cell.component';
-import { AddviewNotesComponent } from '../custom-cell/addviewnotes-cell.component';
+//import { AddviewNotesComponent } from '../custom-cell/addviewnotes-cell.component';
 import { Location, LocationStrategy, PathLocationStrategy } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
 import { AuthenticationService } from '@app/core';
@@ -121,7 +121,7 @@ export class DatazoneComponent implements OnInit {
     //     });
     // }
     //console.log(this.isEdit);
-    this.isLoading = true;
+    //this.isLoading = true;
     this.selectedAdminUser = 0;
     this.quoteService
       .GetProfiles()

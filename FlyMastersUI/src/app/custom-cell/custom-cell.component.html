@@ -72,20 +72,20 @@
                 <div class="form-group col-md-6">
                   <label for="inputEmail"><b>Assign To</b></label>
                   <div ngbDropdown>
-                    <button class="btn btn-outline-primary" id="dropdownConfig" ngbDropdownToggle>
-                      <div ngbDropdownMenu class="dropdown show" aria-labelledby="language-dropdown">
-                        <select
-                          [(ngModel)]="selectedAdminUser"
-                          name="AssignTo"
-                          (change)="filterForeCasts($event.target.value)"
-                        >
-                          <option value="0">--Select Assign To--</option>
-                          <option *ngFor="let associate of associates" value="{{ associate.UserId }}">
-                            {{ associate.UserName }}
-                          </option>
-                        </select>
-                      </div>
-                    </button>
+                    <!-- <button class="btn btn-outline-primary" id="dropdownConfig" ngbDropdownToggle>
+                      <div ngbDropdownMenu class="dropdown show" aria-labelledby="language-dropdown"> -->
+                    <select
+                      [(ngModel)]="selectedAdminUser"
+                      name="AssignTo"
+                      (change)="filterForeCasts($event.target.value)"
+                    >
+                      <option value="0">--Select Assign To--</option>
+                      <option *ngFor="let associate of associates" value="{{ associate.UserId }}">
+                        {{ associate.UserName }}
+                      </option>
+                    </select>
+                    <!-- </div>
+                    </button> -->
                   </div>
                 </div>
               </div>
@@ -149,31 +149,40 @@
     </div>
     <div class="modal-body">
       <div class="form-row">
-        <div class="form-group col-md-6 d-flex justify-content-center">
+        <div class="form-group col-md-10 d-flex justify-content-center">
           <div class="form-row">
             <form>
-              <div class="form-group col-md-6">
+              <div class="form-group col-md-10">
                 <div class="form-row">
                   <div class="form-group col-md-12">
                     <label for="inputNotes"><b>Notes</b></label>
-                    <textarea rows="5" cols="50" class="form-control" id="inputNotes" name="notes"> </textarea>
-                    <button type="button" class="btn btn-outline-dark">Save Notes</button>
-                    <!-- (click)="SaveComments()" -->
+                    <textarea
+                      rows="5"
+                      cols="50"
+                      class="form-control"
+                      id="inputNotes"
+                      [(ngModel)]="leadData.Notes"
+                      name="notes"
+                    >
+                    </textarea>
+                    <button type="submit" class="btn btn-outline-dark" (click)="SaveComments()">Save Notes</button>
                   </div>
                 </div>
                 <div class="form-row">
                   <div class="form-group col-md-12">
                     <label for="inputNotes"><b>Previous Notes:</b></label>
                     <div id="agNotesGrid">
-                      <!-- <ag-grid-angular
-                                        style="width: 100%; height: auto;"
-                                        class="ag-theme-balham"
-                                        [rowData]="rowNotesData"
-                                        [columnDefs]="columnNotesDefs"
-                                        pagination="true"
-                                        paginationPageSize="15"
-                                        >
-                                      </ag-grid-angular> -->
+                      <ag-grid-angular
+                        #dzgrid
+                        style="width: 100%; height: 100%;"
+                        class="ag-theme-balham"
+                        [rowHeight]="35"
+                        [rowData]="rowNotesData"
+                        [columnDefs]="columnNotesDefs"
+                        pagination="true"
+                        paginationPageSize="13"
+                      >
+                      </ag-grid-angular>
                     </div>
                   </div>
                 </div>

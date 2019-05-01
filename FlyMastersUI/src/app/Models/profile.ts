@@ -9,6 +9,8 @@ export interface Profile {
 
   Email: string;
 
+  Notes: string;
+
   Status: string;
 
   AssignedTo: number;

@@ -20,6 +20,13 @@ export class CustomCellComponent implements OnInit {
   selectedAdminUser: number;
   selectedUser: number;
   saveButtonText: string = 'Save';
+  rowNotesData: any[];
+
+  columnNotesDefs = [
+    { headerName: 'Added On', field: 'AddedOn', sortable: true, filter: true },
+    { headerName: 'Added By', field: 'AddedBy', sortable: true, filter: true },
+    { headerName: 'Notes', field: 'Comments', sortable: true, filter: true, tooltipField: 'Comments' }
+  ];
 
   constructor(
     private location: Location,
@@ -40,12 +47,13 @@ export class CustomCellComponent implements OnInit {
     this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' }).result.then(result => {}, reason => {});
   }
   lead(content: string) {
+    this.selectedAdminUser = 0;
     this.loadProfile();
     this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' }).result.then(result => {}, reason => {});
   }
 
   OpenNotes(opennotes: string) {
-    //this.loadProfile();
+    this.loadProfile();
     this.modalService.open(opennotes, { ariaLabelledBy: 'modal-basic-title' }).result.then(result => {}, reason => {});
   }
 
@@ -63,6 +71,9 @@ export class CustomCellComponent implements OnInit {
       )
       .subscribe((quote: any) => {
         this.leadData = quote;
+        this.rowNotesData = quote.profileNotesViewModel;
+        this.leadData.Notes = '';
+        console.log(this.leadData);
         this.datazoneService
           .GetUsers(0)
           .pipe(
@@ -74,7 +85,7 @@ export class CustomCellComponent implements OnInit {
             this.associates = quote;
           });
         this.saveButtonText = quote.StatusID < 3 ? 'Validate Profile' : 'Create Lead';
-        console.log(this.leadData);
+        //console.log(this.leadData);
       });
   }
 
@@ -121,6 +132,28 @@ export class CustomCellComponent implements OnInit {
           console.log(res);
           this.modalService.dismissAll();
           location.href = '/datazone';
+        },
+        err => {
+          console.log('Error occured');
+        }
+      );
+  }
+
+  SaveComments() {
+    this.leadData.ModifyBy = this.authenticationService.credentials.UserId;
+    console.log(this.leadData);
+    this.quoteService
+      .SaveNotes(this.leadData)
+      .pipe(
+        finalize(() => {
+          this.isLoading = false;
+        })
+      )
+      .subscribe(
+        res => {
+          console.log(res);
+          //location.href = '/datazone';
+          this.loadProfile();
         },
         err => {
           console.log('Error occured');
