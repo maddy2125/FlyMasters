@@ -15,6 +15,7 @@ namespace FlyMasters.API.Controllers
     public class ProfilesController : ApiController
     {
         private FLYMASTERSContext _db;
+        private readonly string FlyMastersSourceID = "6";
 
         // GET: api/Profiles
         public IEnumerable<DataZoneViewModel> Get(string userId, string isAdmin)
@@ -103,10 +104,9 @@ namespace FlyMasters.API.Controllers
 
             ProfileEditModel editModel = null;
             var profile = _db.tblProfiles.Find(id);
-
+            editModel = new ProfileEditModel();
             if (profile != null)
             {
-                editModel = new ProfileEditModel();
 
                 editModel.ProfileID = profile.ProfileID;
                 editModel.Email = profile.Email;
@@ -140,50 +140,66 @@ namespace FlyMasters.API.Controllers
                 _db = new FLYMASTERSContext();
                 // TODO: Add update logic here
 
-                var profile = _db.tblProfiles.Find(editModel.ProfileID);
-
-                if (profile != null)
+                if (editModel.ProfileID == 0)
                 {
-                    profile.Email = editModel.Email;
-                    profile.FirstName = editModel.FirstName;
-                    profile.LastName = editModel.LastName;
-                    profile.Phone = editModel.Phone;
-                    if (profile.Status == 3 && editModel.AssignedTo != 0)
-                        profile.Status = 4;
-                    else
-                        profile.Status = 3;
-                    profile.UpdateDate = DateTime.Now;
+                    IList<ProfileImportModel> profileList = new List<ProfileImportModel>();
 
+                    ProfileImportModel profileImport = new ProfileImportModel();
+                    profileImport.FirstName = editModel.FirstName;
+                    profileImport.LastName = editModel.LastName;
+                    profileImport.Email = editModel.Email;
+                    profileImport.Phone = editModel.Phone;
+                    profileList.Add(profileImport);
+                    UploadProfiles(profileList, editModel.ModifyBy.ToString(), FlyMastersSourceID);
+                    return HttpStatusCode.OK;
+                }
+                else
+                {
+                    var profile = _db.tblProfiles.Find(editModel.ProfileID);
 
-                    _db.Entry(profile).State = EntityState.Modified;
-                    _db.SaveChanges();
-
-                    if (!string.IsNullOrEmpty(editModel.Notes))
-                        InsertComment(editModel.ProfileID, editModel.Notes, editModel.ModifyBy);
-
-                    //Assign Lead
-                    if (profile.Status == 4 && editModel.AssignedTo != 0)
+                    if (profile != null)
                     {
-                        tblLead presentLead = _db.tblLeads.Where(x => x.ProfileID == profile.ProfileID && x.IsActive == true).FirstOrDefault();
-                        if (presentLead != null)
-                        {
-                            presentLead.IsActive = false;
-                            _db.Entry(presentLead).State = EntityState.Modified;
-                            _db.SaveChanges();
-                        }
-                        presentLead = new tblLead();
-                        presentLead.ProfileID = profile.ProfileID;
-                        presentLead.MappedUserID = editModel.AssignedTo;
-                        presentLead.IsActive = true;
-                        presentLead.CreateDate = DateTime.Now;
-                        presentLead.CreatedBy = editModel.ModifyBy;
+                        profile.Email = editModel.Email;
+                        profile.FirstName = editModel.FirstName;
+                        profile.LastName = editModel.LastName;
+                        profile.Phone = editModel.Phone;
+                        if (profile.Status == 3 && editModel.AssignedTo != 0)
+                            profile.Status = 4;
+                        else
+                            profile.Status = 3;
+                        profile.UpdateDate = DateTime.Now;
 
-                        _db.tblLeads.Add(presentLead);
+
+                        _db.Entry(profile).State = EntityState.Modified;
                         _db.SaveChanges();
 
-                        InsertComment(editModel.ProfileID, "Lead Created", editModel.ModifyBy);
+                        if (!string.IsNullOrEmpty(editModel.Notes))
+                            InsertComment(editModel.ProfileID, editModel.Notes, editModel.ModifyBy);
+
+                        //Assign Lead
+                        if (profile.Status == 4 && editModel.AssignedTo != 0)
+                        {
+                            tblLead presentLead = _db.tblLeads.Where(x => x.ProfileID == profile.ProfileID && x.IsActive == true).FirstOrDefault();
+                            if (presentLead != null)
+                            {
+                                presentLead.IsActive = false;
+                                _db.Entry(presentLead).State = EntityState.Modified;
+                                _db.SaveChanges();
+                            }
+                            presentLead = new tblLead();
+                            presentLead.ProfileID = profile.ProfileID;
+                            presentLead.MappedUserID = editModel.AssignedTo;
+                            presentLead.IsActive = true;
+                            presentLead.CreateDate = DateTime.Now;
+                            presentLead.CreatedBy = editModel.ModifyBy;
+
+                            _db.tblLeads.Add(presentLead);
+                            _db.SaveChanges();
+
+                            InsertComment(editModel.ProfileID, "Lead Created", editModel.ModifyBy);
+                        }
+                        return HttpStatusCode.OK;
                     }
-                    return HttpStatusCode.OK;
                 }
             }
             catch (Exception ex)
@@ -336,7 +352,7 @@ namespace FlyMasters.API.Controllers
                 {
                     profile.Status = 2;
                     profile.UpdateDate = DateTime.Now;
-                    
+
                     _db.Entry(profile).State = EntityState.Modified;
                     _db.SaveChanges();
                 }

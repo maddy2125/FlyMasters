@@ -47,6 +47,7 @@ export class DatazoneComponent implements OnInit {
     this.importProfile = new ProfileImport();
   }
   open(content: string) {
+    this.loadProfile();
     this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' }).result.then(
       result => {
         this.closeResult = `Closed with: ${result}`;
@@ -161,7 +162,7 @@ export class DatazoneComponent implements OnInit {
 
   loadProfile() {
     this.quoteService
-      .GetProfileById(this.route.snapshot.queryParams['id'])
+      .GetProfileById(this.route.snapshot.queryParams['id'] != undefined ? this.route.snapshot.queryParams['id'] : -1)
       .pipe(
         finalize(() => {
           this.isLoading = false;
@@ -169,6 +170,7 @@ export class DatazoneComponent implements OnInit {
       )
       .subscribe((quote: any) => {
         this.leadData = quote;
+        console.log(quote);
         this.rowNotesData = quote.profileNotesViewModel;
         this.saveButtonText = quote.StatusID < 3 ? 'Validate Profile' : 'Create Lead';
       });

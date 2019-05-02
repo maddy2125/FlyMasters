@@ -11,6 +11,13 @@
         <form>
           <div class="form-row">
             <div class="form-group">
+              <label for="inputaddFirstName"><b>Source: </b></label>
+              <label for="inputaddFirstName"><b> Fly Masters </b></label>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
               <label for="inputaddFirstName"><b>First Name</b></label>
               <input
                 type="text"
@@ -20,6 +27,7 @@
                 placeholder="First Name"
                 ng-required="true"
                 [(ngModel)]="leadData.FirstName"
+                name="FirstName"
               />
             </div>
           </div>
@@ -32,19 +40,37 @@
                 id="inputaddLastName"
                 name="addlastname"
                 placeholder="Last Name"
+                [(ngModel)]="leadData.LastName"
+                name="LastName"
               />
             </div>
           </div>
           <div class="form-row">
             <div class="form-group">
               <label for="inputaddPhone"><b>Phone</b></label>
-              <input type="text" class="form-control" id="inputaddPhone" name="addphone" placeholder="111 111-1111" />
+              <input
+                type="text"
+                class="form-control"
+                id="inputaddPhone"
+                name="addphone"
+                placeholder="111 111-1111"
+                [(ngModel)]="leadData.Phone"
+                name="phone"
+              />
             </div>
           </div>
           <div class="form-row">
             <div class="form-group">
               <label for="inputaddEmail"><b>Email</b></label>
-              <input type="text" class="form-control" id="inputaddEmail" name="addemail" />
+              <input
+                type="text"
+                class="form-control"
+                id="inputaddEmail"
+                name="addemail"
+                placeholder="name@domain.com"
+                [(ngModel)]="leadData.Email"
+                name="email"
+              />
             </div>
           </div>
         </form>
@@ -52,7 +78,14 @@
     </div>
   </div>
   <div class="modal-footer">
-    <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Save</button>
+    <button
+      type="button"
+      class="btn btn-primary"
+      (click)="save()"
+      [disabled]="!leadData.FirstName || !leadData.LastName || !leadData.Phone || !leadData.Email"
+    >
+      Save
+    </button>
   </div>
 </ng-template>
 <div class="container-fluid d-flex justify-content" *ngIf="!isEdit && isAdmin">
