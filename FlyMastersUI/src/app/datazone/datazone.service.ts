@@ -6,6 +6,7 @@ import { Profile } from '../Models/profile';
 import { User } from '../Models/user';
 import { Source } from '../Models/source';
 import { AuthenticationService } from '@app/core';
+import { environment } from '@env/environment';
 
 const routes = {
   quote: (c: RandomQuoteContext) => `/jokes/random?category=${c.category}`
@@ -21,9 +22,11 @@ export class DataZoneService {
   constructor(private httpClient: HttpClient, private authenticationService: AuthenticationService) {}
 
   result: string[];
-  apiUrl: string = 'http://localhost:29224/api';
+  apiUrl: string = environment.serverUrl;
+  //apiUrl: string = 'http://localhost:29224/api';
 
   public GetProfiles(): Observable<Profile[]> {
+    console.log(this.apiUrl);
     const url = this.apiUrl + '/profiles';
     // Initialize Params Object
     let Params = new HttpParams();

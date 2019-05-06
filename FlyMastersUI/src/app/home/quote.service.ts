@@ -4,6 +4,7 @@ import { Observable, of } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
 import { Profile } from '../Models/profile';
 import { User } from '../Models/user';
+import { environment } from '@env/environment';
 
 const routes = {
   quote: (c: RandomQuoteContext) => `/jokes/random?category=${c.category}`
@@ -19,7 +20,8 @@ export class QuoteService {
   constructor(private httpClient: HttpClient) {}
 
   result: string[];
-  apiUrl: string = 'http://localhost:29224/api';
+  apiUrl: string = environment.serverUrl;
+  //apiUrl: string = 'http://localhost:29224/api';
 
   getRandomQuote(context: RandomQuoteContext): Observable<string> {
     return this.httpClient
