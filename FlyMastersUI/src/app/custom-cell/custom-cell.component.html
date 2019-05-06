@@ -171,7 +171,7 @@
                 <div class="form-row">
                   <div class="form-group col-md-12">
                     <label for="inputNotes"><b>Previous Notes:</b></label>
-                    <div id="agNotesGrid">
+                    <!-- <div id="agNotesGrid">
                       <ag-grid-angular
                         #dzgrid
                         style="width: 100%; height: 100%;"
@@ -183,7 +183,23 @@
                         paginationPageSize="13"
                       >
                       </ag-grid-angular>
-                    </div>
+                    </div> -->
+                    <table class="table .table-hover">
+                      <thead class="thead-dark">
+                        <tr>
+                          <th scope="col">Added On</th>
+                          <th scope="col">Added By</th>
+                          <th scope="col">Notes</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr *ngFor="let hero of rowNotesData">
+                          <td>{{ hero.AddedBy }}</td>
+                          <td>{{ hero.AddedOn }}</td>
+                          <td>{{ hero.Comments }}</td>
+                        </tr>
+                      </tbody>
+                    </table>
                   </div>
                 </div>
               </div>
